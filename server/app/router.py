@@ -2,5 +2,5 @@
 from app import api
 
 # 方案宾馆接口--PUT
-from app.json.planHotel import planHotel
-api.add_resource(planHotel, '/plan/hotel')
+from app.json.login import planHotel
+api.add_resource(planHotel, '/login1')
