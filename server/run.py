@@ -4,6 +4,7 @@ from flask import Flask, session, request
 app = Flask(__name__)
 app.secret_key = '~\xc8\xc6\xe0\xf3,\x98O\xa8z4\xfb=\rNd'
 
+
 @app.route('/login')
 def login():
     uid =  request.args.get('uid')
@@ -35,6 +36,10 @@ def tst():
 def a():
     return '<h1>Goooooood</h1>'
 
+@app.route('/who')
+def who():
+    return session['uid']
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
