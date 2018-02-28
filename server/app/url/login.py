@@ -1,9 +1,10 @@
 from app import db, models
 from flask_restful import Resource, Api, reqparse, abort
-from flask import Flask, session, request
-import flask
+from flask import Flask, session, request,render_template,url_for
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+bootstrap=Bootstrap(app)
 app.secret_key = '~\xc8\xc6\xe0\xf3,\x98O\xa8z4\xfb=\rNd'
 class login(Resource):
     def get(self):
@@ -38,3 +39,7 @@ class who(Resource):
             return session['uid']
         else:
             return 'you are no login!'
+class bootstrap(Resource):
+    def get(self):
+        title='Appache'
+        return render_template('/main.html',title=title)
