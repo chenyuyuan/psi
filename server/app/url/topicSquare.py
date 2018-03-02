@@ -12,8 +12,13 @@ btopicSquare=Blueprint('btopicSquare', __name__)
 
 @btopicSquare.route('/topicSquare')
 def test():
-    user = models.user.query.filter_by(id='1').first()
+    alltopic = models.topic.query.all()
+    sql='select * from topicstar where uid=1'
+    mystartopic = list()
+    mystartopic = db.session.execute(sql)
     uid=session['uid']
-    print(user.password)
-    #已关注的话题的标题
-    return render_template('/main.html', title=user.password)
+    # for key in mystartopic:
+    #     print(key.topic)
+    for key in alltopic:
+        print(key.topic+':'+key.topicIntro)
+    return render_template('/topicSquare.html', title='首页首页首页',mystartopic=mystartopic)
