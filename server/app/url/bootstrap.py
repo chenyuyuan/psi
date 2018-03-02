@@ -24,8 +24,7 @@ from flask import Blueprint
 bo=Blueprint('bo', __name__)
 
 
-bootstrap=Bootstrap(app)
-@bo.route('/ma')
+@bo.route('/justtotest')
 def test():
     plan = models.user.query.filter_by(id='1').first()
     title="appache"
