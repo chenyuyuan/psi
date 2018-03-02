@@ -13,5 +13,7 @@ btopicSquare=Blueprint('btopicSquare', __name__)
 @btopicSquare.route('/topicSquare')
 def test():
     user = models.user.query.filter_by(id='1').first()
+    uid=session['uid']
     print(user.password)
+    #已关注的话题的标题
     return render_template('/main.html', title=user.password)

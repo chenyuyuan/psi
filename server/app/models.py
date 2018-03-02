@@ -84,6 +84,7 @@ class topicStar(db.Model):
     id=db.Column(primary_key=True)
     uid=db.Column()
     topicid=db.Column()
+    topic=db.Column()
 
 class topic(db.Model):
     __tablename__='topic'
@@ -93,6 +94,7 @@ class topic(db.Model):
     time=db.Column()
     topicIntro=db.Column()
     queCount=db.Column()
+    picture=db.Column()
 
 class message(db.Model):
     __tablename__='message'
