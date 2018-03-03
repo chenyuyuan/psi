@@ -4,6 +4,8 @@ import flask
 
 # 参数初始化
 parse = reqparse.RequestParser()
+parse.add_argument("name")
+parse.add_argument("formData")
 parse.add_argument("wechat")
 parse.add_argument("id")
 parse.add_argument('hotel')

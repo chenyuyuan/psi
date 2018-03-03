@@ -26,7 +26,7 @@ class question(db.Model):
     picture=db.Column()
     time=db.Column()
     watch=db.Column()
-    relTopic=db.Column()
+    reltopicid=db.Column()
     followerCount=db.Column()
     score=db.Column()
     queCount=db.Column()

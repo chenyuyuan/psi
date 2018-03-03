@@ -18,7 +18,8 @@ def login():
     if uid and psw:
         session['uid'] = uid
         session['_login'] = True
-        return '<h1>login succeed!</h1><a href="http://127.0.0.1:3000/topicSquare">话题广场</a>'
+        return '<h1>login succeed!</h1><a href="http://127.0.0.1:3000/topicSquare">话题广场</a><br/>' \
+               '<a href="http://127.0.0.1:3000/topic/1/hotanswer">话题</a>'
     return '<h1>login failed</h1>'
 
 @blogin.route('/logout')

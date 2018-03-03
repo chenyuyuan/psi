@@ -21,3 +21,5 @@ def test():
     #     print(key.topic)
 
     return render_template('/topicSquare.html', title='话题广场',mystartopic=mystartopic,alltopic=alltopic)
+
+
