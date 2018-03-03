@@ -19,6 +19,5 @@ def test():
     uid=session['uid']
     # for key in mystartopic:
     #     print(key.topic)
-    for key in alltopic:
-        print(key.topic+':'+key.topicIntro)
-    return render_template('/topicSquare.html', title='首页首页首页',mystartopic=mystartopic)
+
+    return render_template('/topicSquare.html', title='话题广场',mystartopic=mystartopic,alltopic=alltopic)
