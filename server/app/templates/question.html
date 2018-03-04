@@ -79,27 +79,41 @@
             </div>
             <div class="col-md-5 column" style="padding:0;margin: 2px">
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <img src="http://127.0.0.1:3000/static/topichead/1.jpg" style="width: 100px">
-                        <span id="test" style="font-size: 30px;"><strong>{{thistopic.topic}}</strong></span>
-                        <br/>
-                        <span>{{thistopic.topicIntro}}</span>
-                    </div>
+                    <span id="test" style="font-size: 24px;"><strong>梅西有多强?</strong></span>
+                    <span style="color:#0084ff;background-color: #e5f2ff;padding: 4px 7px 4px 7px;border:0 solid;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">巴塞罗那</span>
+                    <br/>
+                    <span>从数据和实战来分析，或者与历史上的巅峰球星对比。</span>
+                </div>
 
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 1px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                        <span style="border: #f3f3f3 solid 1px;background-color: #8590A6;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; ">取消关注</span>
-                        &nbsp&nbsp&nbsp
-                    <span id="share" style="color: deepskyblue">分享</span>
+                    <span style="border: #f3f3f3 solid 1px;background-color: #0084ff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:white ;">关注问题</span>
+                    <span style="margin-left: 22px;border: #0084ff solid 1px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">写回答</span>
+                    <span style="margin-left: 22px;color:#77839c">评论</span>
+                    <span id="share" style="margin-left: 22px;color: #77839c">分享</span>
+                    <span style="margin-left: 22px;color: #77839c">举报</span>
+                    <span style="margin-left: 22px;color: #77839c">•••</span>
                 </div>
-                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <span style="font-size: 16px;font-weight: bold">讨论</span>
-                    <span style="font-size: 16px;margin-left: 40px">等待回答</span>
+                <div>
+                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                        <img src="http://127.0.0.1/static/userhead/1.jpg" style="width: 25px"/>
+                        <span style="font-size: 16px;">5个回答</span>
                     <span class="pull-right text-muted"><=>切换为按时间排序</span>
                     </div>
+                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                    <span style="font-size: 16px;">5个回答</span>
+                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
+                    </div>
+                </div>
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                    <span style="font-size: 16px;">5个回答</span>
+                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
+                    </div>
+
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
                    <span style="font-weight: bold;font-size: 20px">{{key.queTitle}}</span>
                     <br/>
-                    <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 25px">
+                    <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 25px"/>
                     <span style="font-size: 18px;font-family: 'Helvetica Neue';">{{key.account}}</span>
                     <span class="text-muted">,{{key.shortIntro}}</span>
                     <p class="text-muted" style="font-size: 14px">{{key.like}}人赞同了该答案</p>

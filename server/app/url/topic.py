@@ -10,7 +10,7 @@ from flask import Blueprint
 btopic=Blueprint('btopic', __name__)
 
 @btopic.route('/topic/<topicid>/hotanswer')
-def test(topicid,style):
+def test(topicid):
     answercontent = []
     thistopic = models.topic.query.filter_by(id=topicid).first()
     sql = "select *  from answer where topicid=1"
@@ -51,4 +51,4 @@ def test(topicid,style):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/topic.html', title='话题',users=users,topicid=topicid,style=style,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/topic.html', title='话题',users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
