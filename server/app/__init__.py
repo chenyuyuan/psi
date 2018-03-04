@@ -5,6 +5,7 @@ from flask import Flask, session, request
 
 app = Flask(__name__)
 
+
 app.config.from_object('config')
 api = Api(app)
 db = SQLAlchemy(app)

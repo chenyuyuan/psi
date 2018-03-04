@@ -12,6 +12,14 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 
     <style>
+        textarea:focus{
+            outline: 0;
+        }
+        .btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow:none;
+        }
         .shadow{
             -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
             -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
@@ -87,27 +95,24 @@
 
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 1px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
                     <span style="border: #f3f3f3 solid 1px;background-color: #0084ff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:white ;">关注问题</span>
-                    <span style="margin-left: 22px;border: #0084ff solid 1px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">写回答</span>
+                    <span id="toanswer" style="margin-left: 22px;border: #0084ff solid 1px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">写回答</span>
                     <span style="margin-left: 22px;color:#77839c">评论</span>
                     <span id="share" style="margin-left: 22px;color: #77839c">分享</span>
                     <span style="margin-left: 22px;color: #77839c">举报</span>
                     <span style="margin-left: 22px;color: #77839c">•••</span>
                 </div>
-                <div>
+                <div id='answering' style="display: none">
                     <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <img src="http://127.0.0.1/static/userhead/1.jpg" style="width: 25px"/>
-                        <span style="font-size: 16px;">5个回答</span>
-                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
+                        <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 25px"/>
+                        <span>chenyuyuan</span>
                     </div>
                     <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <span style="font-size: 16px;">5个回答</span>
-                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
+                        <textarea style="width: 100%;height: 100px;border: 0;" onclick="if($(this).val()=='写回答..'){$(this).val('')}">写回答..</textarea>
+                    </div>
+                    <div class="shadow-smaller" style="height:64px;background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                        <button id="submitanswer" class="btn btn-info" style="position: relative;float: right">提交答案</button>
                     </div>
                 </div>
-                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <span style="font-size: 16px;">5个回答</span>
-                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
-                    </div>
 
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
@@ -189,7 +194,7 @@
             <div class="col-md-2 column">
             </div>
             <div class="col-md-5 column">
-                <address> <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+                <address> <strong>hit.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
             </div>
             <div class="col-md-3 column">
             </div>
@@ -198,13 +203,38 @@
         </div>
     </div>
 </div>
-</div>
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
+    $(document).ready(function () {
+
         $('#share').click(function () {
-            alert("111111")
-            var v="ppp"
+            alert("111111");
+            var v="ppp";
             window.clipboardData.setData("text",v);
+        });
+    $('#toanswer').click(function () {
+        if($('#answering').css('display')=='none'){
+            $('#answering').css('display','');
+            // var a={{title|tojson}}
+            // alert(a)
+        }
+    })
+        var data={
+            'questionid':'1'
+        }
+        $('#submitanswer').click(function () {
+            $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/submit',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    alert("good")
+                    alert(data.msg)
+                }
+            })
         })
+    })
     </script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>

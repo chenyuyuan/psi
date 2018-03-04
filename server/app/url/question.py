@@ -12,8 +12,9 @@ bquestion=Blueprint('bquestion', __name__)
 @bquestion.route('/question/<questionid>/hotanswer')
 def test(questionid):
     answercontent = []
-    thistopic = models.topic.query.filter_by(id=questionid).first()
-    sql = "select *  from answer where topicid=1"
+    #本问题页的问题的基本信息
+    thisquestion = models.topic.query.filter_by(id=questionid).first()
+    sql = "select *  from answer where qid=1"
     answer = list()
     answered=[]
     answer = db.session.execute(sql)
@@ -40,10 +41,10 @@ def test(questionid):
                 })
                 break
     print(answered)
-    for i in range(0,len(answered)):
-        print(answered[i]['id'])
-    for key in answered:
-        print(key['uid'])
+    # for i in range(0,len(answered)):
+    #     print(answered[i]['id'])
+    # for key in answered:
+    #     print(key['uid'])
     for key in answered:
         with open("C://Users//梅西//Desktop//forserver//answer//"+str(key['id'])+".txt","r+") as f:
             h=f.read()
@@ -51,4 +52,4 @@ def test(questionid):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/question.html', title='问题',users=users,questionid=questionid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/question.html', title='问题',users=users,questionid=questionid,thisquestion=thisquestion,answered=answered,answercontent=answercontent)
