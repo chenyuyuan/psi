@@ -7,9 +7,9 @@ from flask_bootstrap import Bootstrap
 from flask import Blueprint
 
 
-btopic=Blueprint('btopic', __name__)
+bquestion=Blueprint('bquestion', __name__)
 
-@btopic.route('/topic/<topicid>/hotanswer')
+@bquestion.route('/question/<questionid>/hotanswer')
 def test(topicid,style):
     answercontent = []
     thistopic = models.topic.query.filter_by(id=topicid).first()
@@ -51,4 +51,4 @@ def test(topicid,style):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/topic.html', title='话题',users=users,topicid=topicid,style=style,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/question.html', title='问题',users=users,topicid=topicid,style=style,thistopic=thistopic,answered=answered,answercontent=answercontent)

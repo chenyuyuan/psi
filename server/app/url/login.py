@@ -19,7 +19,8 @@ def login():
         session['uid'] = uid
         session['_login'] = True
         return '<h1>login succeed!</h1><a href="http://127.0.0.1:3000/topicSquare">话题广场</a><br/>' \
-               '<a href="http://127.0.0.1:3000/topic/1/hotanswer">话题</a>'
+               '<a href="http://127.0.0.1:3000/topic/1/hotanswer">话题</a>' \
+               '<a href="http://127.0.0.1:3000/question/1/hotanswer">问题</a>'
     return '<h1>login failed</h1>'
 
 @blogin.route('/logout')
@@ -43,42 +44,9 @@ def who():
     if session['uid']:
         return session['uid']
     else:
-        return '<h1>you are no login!</h1><a href="http://127.0.0.1:3000/topicSquare">话题广场</a>'
+        return '<h1>you are no login!</h1>'
 
 @blogin.route('/bootstrap')
 def bootstrap(Resource):
     title='Bootstrap'
     return render_template('/main.html',title=title)
-# class login(Resource):
-#     def get(self):
-#         uid = request.args.get('uid')
-#         psw = request.args.get('psw')
-#         if uid and psw:
-#             session['uid'] = uid
-#             session['_login'] = True
-#             return '<h1>login succeed!</h1>'
-#         return '<h1>login failed</h1>'
-# class logout(Resource):
-#     def get(self):
-#         if 'uid' in session:
-#             session.pop('uid')
-#         if '_login' in session:
-#             session.pop('_login')
-#             return '<h1>logout succeed</h1>'
-#         return '<h1>logout failed<h1>'
-# class test_login(Resource):
-#     def get(self):
-#         if 'uid' in session:
-#             return '<h1>you are still in</h1>'
-#         else:
-#             return '<h1>you have logouted</h1>'
-# class who(Resource):
-#     def get(self):
-#         if session['uid']:
-#             return session['uid']
-#         else:
-#             return 'you are no login!'
-# class bootstrap(Resource):
-#     def get(self):
-#         title='Appache'
-#         return render_template('/main.html',title=title)

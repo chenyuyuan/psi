@@ -37,19 +37,3 @@ class planHotel(Resource):
             return {
                 abort(404, message="It doesn't exist")
             }
-
-        # with open("E://l.txt", "w+") as f:
-        #     f.write("male,160400220,Jon\nfemale,160400101,Marry,")
-        # with open("E://l.txt", "r+") as f:
-        #     h = f.read()
-        # g = list(h)
-        # l = ''
-        # k = []
-        # for i in g:
-        #     if i != ',':
-        #         l += i
-        #     elif i == ',' or i == '\n':
-        #         k.append(l)
-        #         l = ''
-        # for i in k:
-        #     print(k)
