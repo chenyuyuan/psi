@@ -1,6 +1,5 @@
 from app import app
 
-from app.url.bootstrap import bo
 from app.url.upload import upload
 from app.url.login import blogin
 from app.url.topicSquare import btopicSquare
@@ -11,7 +10,6 @@ from app.url.submit import bsubmit
 app.register_blueprint(btopicSquare)
 app.register_blueprint(blogin)
 app.register_blueprint(upload)
-app.register_blueprint(bo,url_prefix='/bb')
 app.register_blueprint(btopic)
 app.register_blueprint(bquestion)
 app.register_blueprint(bsubmit)
