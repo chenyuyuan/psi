@@ -16,7 +16,7 @@ def test():
     data=request.get_json()
     question=models.question.query.filter_by(id=data['qid']).first()
     sql='select * from answer order by id desc limit 1'
-    maxid = db.session.execute(sql)
+    maxid = db.session.execute(sql).first()
     print(maxid)
     maxid=int(maxid['id'])+1
     answer=models.answer()
@@ -34,6 +34,8 @@ def test():
     answer.delete=0
     db.session.add(answer)
     db.session.commit()
+    with open("C://Users//梅西//Desktop//forserver//answer//"+str(maxid)+".txt", "w+") as f:
+        f.write(data['anscontent'])
     print(data['anscontent'])
     print(data['qid'])
     return json.dumps({'msg':True,'id':'1'})

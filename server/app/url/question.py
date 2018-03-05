@@ -40,6 +40,7 @@ def test(questionid):
                     "delete":key.delete
                 })
                 break
+    answered=answered[::-1]
     print(answered)
     # for i in range(0,len(answered)):
     #     print(answered[i]['id'])

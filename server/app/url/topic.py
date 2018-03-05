@@ -40,6 +40,7 @@ def test(topicid):
                 })
                 break
     print(answered)
+    answered=answered[::-1]
     for i in range(0,len(answered)):
         print(answered[i]['id'])
     for key in answered:
