@@ -29,7 +29,7 @@ class question(db.Model):
     reltopicid=db.Column()
     followerCount=db.Column()
     score=db.Column()
-    queCount=db.Column()
+    ansCount=db.Column()
     delete=db.Column()
 
 class answer(db.Model):
