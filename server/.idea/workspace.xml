@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b1b191ec-9808-49da-a86a-ac8826ea1145" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/templates/pageofmine.html" afterPath="$PROJECT_DIR$/app/templates/pageofmine.html" />
-      <change beforePath="$PROJECT_DIR$/app/templates/question.html" afterPath="$PROJECT_DIR$/app/templates/question.html" />
-      <change beforePath="$PROJECT_DIR$/app/url/question.py" afterPath="$PROJECT_DIR$/app/url/question.py" />
-      <change beforePath="$PROJECT_DIR$/app/url/submit.py" afterPath="$PROJECT_DIR$/app/url/submit.py" />
-      <change beforePath="$PROJECT_DIR$/app/url/topic.py" afterPath="$PROJECT_DIR$/app/url/topic.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -618,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520264737160</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Pycharm submit.py can insert a record">
+      <created>1520267146006</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1520267146006</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
