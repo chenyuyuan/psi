@@ -216,7 +216,7 @@
         $('#submitanswer').click(function () {
             $.ajax({
                 type:'POST',
-                url:'http://127.0.0.1:3000/submit',
+                url:'http://127.0.0.1:3000/submit/answering',
                 contentType: 'application/json; charset=UTF-8',
                 data:JSON.stringify(data),
                 dataType:'json',

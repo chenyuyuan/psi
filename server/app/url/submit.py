@@ -10,12 +10,12 @@ import time
 
 bsubmit=Blueprint('bsubmit', __name__)
 
-@bsubmit.route('/submit',methods=['GET','POST'])
+@bsubmit.route('/submit/answering',methods=['GET','POST'])
 def test():
     thistime=int(time.time())
     data=request.get_json()
     question=models.question.query.filter_by(id=data['qid']).first()
-    sql='select * from answer order by id desc limit 1'
+    sql='select *  from answer order by id desc limit 1'
     maxid = db.session.execute(sql).first()
     print(maxid)
     maxid=int(maxid['id'])+1
@@ -39,3 +39,29 @@ def test():
     print(data['anscontent'])
     print(data['qid'])
     return json.dumps({'msg':True,'id':'1'})
+
+@bsubmit.route('/submit/topicstar',methods=['GET','POST'])
+def topicstar():
+    data=request.get_json()
+    topicid=data["topicid"]
+    uid=session["uid"]
+    intable=models.topicStar.query.filter_by(uid=uid,topicid=topicid).first()
+    if intable:
+        return json.dumps({'msg':'already in'})
+    else:
+        topic=models.topic.query.filter_by(id=topicid).first()
+        sql='select *  from topicstar order by id desc limit 1'
+        maxid = db.session.execute(sql).first()
+        print(maxid)
+        maxid=int(maxid['id'])+1
+        topicstar=models.topicStar()
+        topicstar.id=maxid
+        topicstar.uid=uid
+        topicstar.topicid=topicid
+        topicstar.topic=topic.topic
+        db.session.add(topicstar)
+        db.session.commit()
+        print('chenggong')
+        return json.dumps({'msg':True,'id':'1'})
+
+

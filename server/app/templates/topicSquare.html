@@ -83,7 +83,7 @@
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:10px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
                     <div style="margin: 3px 10px 8px 8px"><strong>我关注的话题</strong></div>
                     {% for key in mystartopic%}
-                    <span class="mytopic" style="color:#6255b3;padding:4px 8px 4px 8px;border:1px #daecf5 solid;border-top-right-radius:15px; border-top-left-radius:15px; border-bottom-left-radius:15px; border-bottom-right-radius:15px; "><a href="">{{key.topic}}</a></span>
+                    <span class="mytopic" style="color:#6255b3;padding:4px 8px 4px 8px;border:1px #daecf5 solid;border-top-right-radius:15px; border-top-left-radius:15px; border-bottom-left-radius:15px; border-bottom-right-radius:15px; "><a href="http://127.0.0.1:3000/topic/{{key.topicid}}/hotanswer">{{key.topic}}</a></span>
                     {% endfor %}
                 </div>
                 <div class="row clearfix">
@@ -91,7 +91,7 @@
                     <div class="col-md-6 column">
                         <div class="shadow-smaller" style="width:100%;background-color: white;position: relative;float: left;margin-left: 9px;margin-bottom: 10px;padding:8px">
                             <img src="http://127.0.0.1:3000/static/topichead/{{key.id}}.jpg" style="width:55px">
-                            <span><a href=#>{{key.topic}}</a></span><span class="pull-right" style="margin-top: 16px"><a>关注</a></span>
+                            <span><a href="http://127.0.0.1:3000/topic/{{key.id}}/hotanswer">{{key.topic}}</a></span><span class="pull-right starring text-muted" style="margin-top: 16px" name="{{key.id}}">关注</span>
                             <br/>
                             <span>{{key.topicIntro}}</span>
                         </div>
@@ -170,6 +170,22 @@
 </div>
 </div>
 <script type="text/javascript">
+    $('.starring').click(function () {
+        var a=$(this).attr("name");
+        var data={
+            "topicid":a
+        }
+        $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/submit/topicstar',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    alert(data.msg)
+                }
+            })
+    })
 </script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
