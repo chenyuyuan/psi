@@ -17,8 +17,8 @@ def test(topicid):
     answer = list()
     answered=[]
     answer = db.session.execute(sql)
-    # uid = session['uid']
-    # user=models.user.query.filter_by(id=uid).first()
+    uid = 1#session['uid']
+    user=models.user.query.filter_by(id=uid).first()
     users=models.user.query.all()
     count=0
     for key in answer:
@@ -52,4 +52,4 @@ def test(topicid):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/topic.html', title='话题',users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/topic.html', title='话题',uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
