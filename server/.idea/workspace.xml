@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1b191ec-9808-49da-a86a-ac8826ea1145" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/url/comment.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/templates/question.html" afterPath="$PROJECT_DIR$/app/templates/question.html" />
-      <change beforePath="$PROJECT_DIR$/app/templates/topic.html" afterPath="$PROJECT_DIR$/app/templates/topic.html" />
-      <change beforePath="$PROJECT_DIR$/app/url/topic.py" afterPath="$PROJECT_DIR$/app/url/topic.py" />
-      <change beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -623,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520328445807</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Pycharm dom">
+      <created>1520350912864</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1520350912864</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -685,7 +687,8 @@
     <MESSAGE value="Pycharm Daily Pushing" />
     <MESSAGE value="Pycharm submit.py can insert a record" />
     <MESSAGE value="Pycharm daily commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pycharm daily commit" />
+    <MESSAGE value="Pycharm dom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pycharm dom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
