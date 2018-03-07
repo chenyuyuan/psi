@@ -14,17 +14,21 @@ bcomment=Blueprint('bcomment', __name__)
 def answer():
     thistime=int(time.time())
     anscomment=models.ansComment.query.filter_by(ansid=11).all()
+    users=models.user.query.all()
     print(anscomment[1].content)
     datas=[]
     for key in anscomment:
-        datas.append({
-            "id":key.id,
-            "uid":key.uid,
-            "fid":key.fid,
-            "pid":key.pid,
-            "like":key.like,
-            "content":key.content,
-            "time":key.time,
-            "ansid":key.ansid
-        })
+        for king in users:
+            if king.id==key.uid:
+                datas.append({
+                    "id":key.id,
+                    "uid":key.uid,
+                    "account":king.account,
+                    "fid":key.fid,
+                    "pid":key.pid,
+                    "like":key.like,
+                    "content":key.content,
+                    "time":key.time,
+                    "ansid":key.ansid
+                })
     return json.dumps({"msg":"1","data":datas})

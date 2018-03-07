@@ -117,7 +117,7 @@
                         <span class="text-muted" style="margin-left: 20px;">•••</span>
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
-                    <div style="display: none">
+                    <div style="display: none" name="0">
 
                     </div>
                 </div>
@@ -199,7 +199,10 @@
     $(document).ready(function () {
         $(".commentclick").on("click",function () {
             var kingdom=$(this).parent().next().next();
-            if(kingdom.css("display")=="none"){
+            var pt = new ParentTree();
+            if(kingdom.css("display")=="none"&&kingdom.attr("name")=="0"){
+                kingdom.attr("name","1")
+                kingdom.css("display","")
                 $.ajax({
                 url:'http://127.0.0.1:3000/comment/answer',
                 type:'GET',
@@ -207,9 +210,9 @@
                 dataType:'json',
                 success:function (data) {
                     if(data.msg=='1'){
-                        var pt = new ParentTree();
+                        
                         newdata=data.data;
-                        console.log(newdata)
+                        //console.log(newdata)
                         for(var key in newdata){
                             for(var king in newdata){
                                 if(newdata[key].pid==-1){
@@ -224,6 +227,7 @@
                         }
                     }
                     maxDepth=0;
+                    console.log(pt.nodes[1].data)
                     for(var i=0;i<pt.nodes.length;i++){
                         depth=0;
                         for (var j=i; j!=-1;j=pt.nodes[j].parent){
@@ -232,19 +236,25 @@
                         if(depth>maxDepth)maxDepth=depth
                     }
                     for(var i in pt.nodes){
-                    if(pt.nodes[i].parent==-1){
-                        kingdom.append("<div name=\"13\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
-            "        <div>\n" +
-            "            <img src=\"http://127.0.0.1:3000/static/userhead/1.jpg\" style=\"width: 15px\">\n" +
-            "            <span>小明:</span>\n" +
-            "            <span>233333</span>\n" +
-            "        </div>\n" +
-            "    </div>")
-                    }
+                        if(pt.nodes[i].parent==-1){
+                            kingdom.append("<div name=\""+pt.nodes[i].data.id+"\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
+                "        <div>\n" +
+                "            <img src=\"http://127.0.0.1:3000/static/userhead/1.jpg\" style=\"width: 15px\">\n" +
+                "            <span>"+pt.nodes[i].data.account+":</span>\n" +
+                "            <span>"+pt.nodes[i].data.content+"</span>\n" +
+                "        </div>\n" +
+                "    </div>")
+                        }
                 }
                 },
                 error:function (e) {alert(e.status)}
             })
+            }
+            else if(kingdom.css("display")=="none"&&kingdom.attr("name")=="1"){
+                kingdom.css("display","");
+            }
+            else{
+                kingdom.css("display","none");
             }
         //     kingdom.append("<div name=\"13\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
         // "        <div>\n" +
