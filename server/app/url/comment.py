@@ -13,12 +13,11 @@ bcomment=Blueprint('bcomment', __name__)
 @bcomment.route('/comment/answer',methods=['GET','POST'])
 def answer():
     thistime=int(time.time())
-    data=request.get_json()
     anscomment=models.ansComment.query.filter_by(ansid=11).all()
     print(anscomment[1].content)
-    data=[]
+    datas=[]
     for key in anscomment:
-        data.append({
+        datas.append({
             "id":key.id,
             "uid":key.uid,
             "fid":key.fid,
@@ -28,4 +27,4 @@ def answer():
             "time":key.time,
             "ansid":key.ansid
         })
-    return json.dumps({"msg":True,"data":data})
+    return json.dumps({"msg":"1","data":datas})

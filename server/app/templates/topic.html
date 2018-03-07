@@ -118,23 +118,31 @@
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
                     <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
-                        <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
-                        <span>小明:</span>
-                        <span>233333</span>
-                        <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                        <div>
                             <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
                             <span>小明:</span>
                             <span>233333</span>
+                        </div>
+                        <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                            <div>
+                                <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+                                <span>小明:</span>
+                                <span>233333</span>
+                            </div>
                             <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
-                            <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
-                            <span>小明:</span>
-                            <span>233333</span>
+                                <div>
+                                    <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+                                    <span>小明:</span>
+                                    <span>233333</span>
+                                </div>
                         </div>
                         </div>
                         <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
-                            <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
-                            <span>小明:</span>
-                            <span>233333</span>
+                            <div>
+                                <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+                                <span>小明:</span>
+                                <span>233333</span>
+                            </div>
                         </div>
                     </div>
                     <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #f2f2f2;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
@@ -215,6 +223,91 @@
 </div>
 </div>
 <script type="text/javascript">
+    console.log(1)
+    function ParentTree() {
+    this.nodes = [];
+}
+ParentTree.prototype = {
+    constructor: ParentTree,
+    getDepth: function () {
+        var maxDepth = 0;
+
+        for (var i = 0; i < this.nodes.length; i++) {
+            var dep = 0;
+            for (var j = i; j >= 0; j = this.nodes[i].parent) dep++;
+            if (dep > maxDepth) maxDepth = dep;
+        }
+
+        return maxDepth;
+    }
+};
+function ParentTreeNode(data, parent) {
+    // type: ParentTree
+    this.data = data || null;
+    // 双亲位置域 {Number}
+    this.parent = parent || 0;
+}
+
+var pt = new ParentTree();
+
+    $(document).ready(function () {
+        //alert("11")
+        $.ajax({
+            url:'http://127.0.0.1:3000/comment/answer',
+            type:'GET',
+            contentType: 'application/json; charset=UTF-8',
+            dataType:'json',
+            success:function (data) {
+                if(data.msg=='1'){
+
+                    // for(var key in data.data){
+                    //     p[String(key)]=data.data[key].pid;
+                    // }
+                    // for(var key in p){
+                    //
+                    // }
+                    // count[newdata[newdata.lenth]];
+                    // for(var key in count){
+                    //     count[key]=0
+                    // }
+                    // console.log(newdata)
+                    // for(var i in newdata){
+                    //     while(i!==newdata[i].id){
+                    //         newdata[i].id--
+                    //         count[newdata]++
+                    //     }
+                    // }
+                    newdata=data.data;
+                    console.log(newdata)
+                    for(var key in newdata){
+                        for(var king in newdata){
+                            if(newdata[key].pid==-1){
+                                pt.nodes.push(new ParentTreeNode(newdata[key], -1));
+                                break;
+                            }
+                            else if(newdata[king].id==newdata[key].pid){
+                                pt.nodes.push(new ParentTreeNode(newdata[key], king));
+                                break;
+                            }
+                        }
+                    }
+                }
+                console.log(pt);
+                //求树的深度
+                maxDepth=0;
+                for(var i=0;i<pt.nodes.length;i++){
+                    depth=0;
+                    for (var j=i; j!=-1;j=pt.nodes[j].parent){
+                        depth=depth+1;
+                    }
+                    if(depth>maxDepth)maxDepth=depth
+                }
+                //console.log(maxDepth)
+            },
+            error:function (e) {
+                alert(e.status)
+            }
+        })
         $('#share').click(function () {
             alert("111111")
             var v="ppp"
@@ -225,14 +318,9 @@
         if($(".line").css("display")=="none"){
             $('.line').css('display','');
         }
-    //         $('#toanswer')click(function () {
-    //     if($('#answering').css('display')=='none'){
-    //         $('#answering').css('display','');
-    //         // var a={{title|tojson}}
-    //         // alert(a)
-    //     }
-    // })
     })
+    })
+
     </script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
