@@ -122,7 +122,10 @@
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
                     <div style="display: none" name="0">
-
+                        <div class="input-group" style="margin-top: 10px;">
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon" style="background-color: #6db0ff;color:white;width: 50px">发表</span>
+                        </div>
                     </div>
                 </div>
 
@@ -204,14 +207,20 @@
         $(".commentclick").on("click",function () {
             var kingdom=$(this).parent().next().next();
             var pt = new ParentTree();
+            var ansid=$(this).attr("name")//得到点击的回答id
+            //alert(ansid)
             if(kingdom.css("display")=="none"&&kingdom.attr("name")=="0"){
                 kingdom.attr("name","1")
                 kingdom.css("display","")
+                var data={
+                    "ansid":ansid
+                }
                 $.ajax({
                 url:'http://127.0.0.1:3000/comment/answer',
-                type:'GET',
+                type:'POST',
                 contentType: 'application/json; charset=UTF-8',
                 dataType:'json',
+                data:JSON.stringify(data),
                 success:function (data) {
                     if(data.msg=='1'){
                         
@@ -229,9 +238,13 @@
                                 }
                             }
                         }
-                    }
-                    maxDepth=0;
-                    console.log(pt.nodes[1].data)
+                        maxDepth=0;
+                        commentinput="                        <div class=\"input-group\" style=\"margin-top: 10px;\">\n" +
+                            "                            <input type=\"text\" class=\"form-control\">\n" +
+                            "                            <span class=\"input-group-addon\" style=\"background-color: #6db0ff;color:white;width: 50px\">回复</span>\n" +
+                            "                        </div>"
+                        
+                    //console.log(pt.nodes[1].data)
                     for(var i=0;i<pt.nodes.length;i++){
                         depth=0;
                         for (var j=i; j!=-1;j=pt.nodes[j].parent){
@@ -249,7 +262,7 @@
                 "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[i].data.like+"</span>\n" +
                 "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <img class='replyanscomme' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='$(this).parent().append(commentinput)' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class=\"pull-right\">"+pt.nodes[i].data.time+"</span>" +
                 "        </div>\n" +
@@ -267,7 +280,7 @@
                 "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" onmouseover='if($(this).attr(\"width\")==\"13px\"){$(this).attr(\"width\",\"14px\")}else{$(this).attr(\"width\",\"13px\")}' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[p].data.like+"</span>\n" +
                 "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='$(this).parent().append(commentinput)' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class=\"pull-right\">"+pt.nodes[p].data.time+"</span>" +
                 "        </div>\n" +
@@ -275,6 +288,11 @@
                             pt.nodes[p].parent=-2
                         }
                     }
+                    }
+                    else{
+                        console.log("This answer have no comments")
+                    }
+
                 },
                 error:function (e) {alert(e.status)}
             })
@@ -287,10 +305,16 @@
             }
         })
 
-        $('#share').click(function () {
-            alert("111111")
-            var v="ppp"
-            window.clipboardData.setData("text",v);
+        // $('#share').click(function () {
+        //     alert("111111")
+        //     var v="ppp"
+        //     // window.clipboardData.setData("text",v);
+        // })
+        $('.replyanscomment').on("click",function () {
+            $(this).append("<div class=\"input-group\" style=\"margin-top: 10px;\">\n" +
+                "                            <input type=\"text\" class=\"form-control\">\n" +
+                "                            <span class=\"input-group-addon\" style=\"background-color: #6db0ff;color:white;width: 50px\">发表</span>\n" +
+                "                        </div>")
         })
  })
 

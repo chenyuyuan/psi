@@ -13,22 +13,27 @@ bcomment=Blueprint('bcomment', __name__)
 @bcomment.route('/comment/answer',methods=['GET','POST'])
 def answer():
     thistime=int(time.time())
-    anscomment=models.ansComment.query.filter_by(ansid=11).all()
+    data=request.get_json()
+    #print("ansid:"+data["ansid"])
+    anscomment=models.ansComment.query.filter_by(ansid=data["ansid"]).all()
     users=models.user.query.all()
-    print(anscomment[1].content)
-    datas=[]
-    for key in anscomment:
-        for king in users:
-            if king.id==key.uid:
-                datas.append({
-                    "id":key.id,
-                    "uid":key.uid,
-                    "account":king.account,
-                    "fid":key.fid,
-                    "pid":key.pid,
-                    "like":key.like,
-                    "content":key.content,
-                    "time":time.strftime("%m-%d %H:%M:%S",time.localtime(key.time)),
-                    "ansid":key.ansid
-                })
-    return json.dumps({"msg":"1","data":datas})
+    #print(anscomment[1].content)
+    if anscomment:
+        datas=[]
+        for key in anscomment:
+            for king in users:
+                if king.id==key.uid:
+                    datas.append({
+                        "id":key.id,
+                        "uid":key.uid,
+                        "account":king.account,
+                        "fid":key.fid,
+                        "pid":key.pid,
+                        "like":key.like,
+                        "content":key.content,
+                        "time":time.strftime("%m-%d %H:%M:%S",time.localtime(key.time)),
+                        "ansid":key.ansid
+                    })
+        return json.dumps({"msg":"1","data":datas})
+    else:
+        return json.dumps({"msg":"2","data":{}})
