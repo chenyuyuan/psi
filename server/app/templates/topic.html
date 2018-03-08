@@ -12,6 +12,10 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 
     <style>
+        .greyer {
+            -webkit-filter: grayscale(10);/* Webkit */
+            filter: grayscale(10);/* W3C */
+            }
         .shadow{
             -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
             -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
@@ -237,15 +241,40 @@
                     }
                     for(var i in pt.nodes){
                         if(pt.nodes[i].parent==-1){
-                            kingdom.append("<div name=\""+pt.nodes[i].data.id+"\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
+                            kingdom.append("<div name=\""+i+"\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
                 "        <div>\n" +
-                "            <img src=\"http://127.0.0.1:3000/static/userhead/1.jpg\" style=\"width: 15px\">\n" +
+                "            <img src=\"http://127.0.0.1:3000/static/userhead/"+pt.nodes[i].data.uid+".jpg\" style=\"width: 15px\">\n" +
                 "            <span>"+pt.nodes[i].data.account+":</span>\n" +
                 "            <span>"+pt.nodes[i].data.content+"</span>\n" +
+                "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[i].data.like+"</span>\n" +
+                "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='replyanscomme' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <span class=\"pull-right\">"+pt.nodes[i].data.time+"</span>" +
                 "        </div>\n" +
                 "    </div>")
+                            pt.nodes[i].parent=-2
                         }
-                }
+                    }
+                    for (var i=0;i<maxDepth+3;i++){
+                        for (var p=0;p<pt.nodes.length;p++){
+                            kingdom.find("div[name='"+pt.nodes[p].parent+"']").append("<div name=\""+p+"\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
+                "        <div>\n" +
+                "            <img src=\"http://127.0.0.1:3000/static/userhead/"+pt.nodes[p].data.uid+".jpg\" style=\"width: 15px\" style='margin-left: 5px'>\n" +
+                "            <span>"+pt.nodes[p].data.account+":</span>\n" +
+                "            <span>"+pt.nodes[p].data.content+"</span>\n" +
+                "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" onmouseover='if($(this).attr(\"width\")==\"13px\"){$(this).attr(\"width\",\"14px\")}else{$(this).attr(\"width\",\"13px\")}' width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[p].data.like+"</span>\n" +
+                "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <span class=\"pull-right\">"+pt.nodes[p].data.time+"</span>" +
+                "        </div>\n" +
+                "    </div>")
+                            pt.nodes[p].parent=-2
+                        }
+                    }
                 },
                 error:function (e) {alert(e.status)}
             })
@@ -256,13 +285,6 @@
             else{
                 kingdom.css("display","none");
             }
-        //     kingdom.append("<div name=\"13\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
-        // "        <div>\n" +
-        // "            <img src=\"http://127.0.0.1:3000/static/userhead/1.jpg\" style=\"width: 15px\">\n" +
-        // "            <span>小明:</span>\n" +
-        // "            <span>233333</span>\n" +
-        // "        </div>\n" +
-        // "    </div>")
         })
 
         $('#share').click(function () {
@@ -270,17 +292,11 @@
             var v="ppp"
             window.clipboardData.setData("text",v);
         })
-    // $("#comment12").click(function () {
-    //     alert("wc")
-    //     if($(".line").css("display")=="none"){
-    //         $('.line').css('display','');
-    //     }
-    // })
  })
 
     </script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 

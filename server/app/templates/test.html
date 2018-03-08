@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<div>
+<div id="good">
     <div id="qq" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
     <div>
         <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
@@ -37,7 +37,7 @@
             <span>小明:</span>
             <span>233333</span>
         </div>
-        <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+        <div name="9" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
             <div>
                 <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
                 <span>小明:</span>
@@ -50,6 +50,11 @@
             <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
             <span>小明:</span>
             <span>233333</span>
+            <img src="http://127.0.0.1:3000/static/material/like.jpg" width="13px">
+            <img src="http://127.0.0.1:3000/static/material/unlike.jpg" width="13px">
+            <img src="http://127.0.0.1:3000/static/material/reply.jpg" width="13px">
+            <img src="http://127.0.0.1:3000/static/material/tipoff.png" width="13px">
+            <span class="pull-right">12:25</span>
         </div>
     </div>
 </div>
@@ -65,6 +70,9 @@
         "        </div>\n" +
         "    </div>")
     $('div[name*="13"]').on('click', function(){console.log('click13');})
+    $("#good").find("div[name='9']").on("click",function () {
+        console.log("ptptptptptptptptptptptpt")
+    })
 </script>
 </body>
 

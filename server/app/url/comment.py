@@ -28,7 +28,7 @@ def answer():
                     "pid":key.pid,
                     "like":key.like,
                     "content":key.content,
-                    "time":key.time,
+                    "time":time.strftime("%m-%d %H:%M:%S",time.localtime(key.time)),
                     "ansid":key.ansid
                 })
     return json.dumps({"msg":"1","data":datas})
