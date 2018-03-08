@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1b191ec-9808-49da-a86a-ac8826ea1145" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/static/material/__init__.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/templates/test.html" afterPath="$PROJECT_DIR$/app/templates/test.html" />
-      <change beforePath="$PROJECT_DIR$/app/templates/topic.html" afterPath="$PROJECT_DIR$/app/templates/topic.html" />
-      <change beforePath="$PROJECT_DIR$/app/url/comment.py" afterPath="$PROJECT_DIR$/app/url/comment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -115,8 +111,8 @@
       <file leaf-file-name="topic.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/topic.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="264" column="76" lean-forward="true" selection-start-line="264" selection-start-column="76" selection-end-line="264" selection-end-column="76" />
+            <state relative-caret-position="476">
+              <caret line="256" column="49" lean-forward="true" selection-start-line="256" selection-start-column="49" selection-end-line="256" selection-end-column="49" />
               <folding>
                 <element signature="e#11899#12148#0" expanded="false" />
                 <element signature="e#11999#12069#0" expanded="false" />
@@ -709,7 +705,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520438703710</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Pycharm comment">
+      <created>1520479615615</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1520479615615</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1144,8 +1147,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/topic.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="264" column="76" lean-forward="true" selection-start-line="264" selection-start-column="76" selection-end-line="264" selection-end-column="76" />
+        <state relative-caret-position="476">
+          <caret line="256" column="49" lean-forward="true" selection-start-line="256" selection-start-column="49" selection-end-line="256" selection-end-column="49" />
           <folding>
             <element signature="e#11899#12148#0" expanded="false" />
             <element signature="e#11999#12069#0" expanded="false" />
