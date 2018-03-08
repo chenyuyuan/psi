@@ -37,3 +37,16 @@ def answer():
         return json.dumps({"msg":"1","data":datas})
     else:
         return json.dumps({"msg":"2","data":{}})
+@bcomment.route('/comment/answer/submit',methods=['GET','POST'])
+def anscommentsubmit():
+    thistime = int(time.time())
+    #获取anscomment最大id
+    anscomment=models.ansComment.query.all()
+    maxid=anscomment[len(anscomment)-1].id
+    maxid=maxid+1
+    insertcomment=models.ansComment()
+    insertcomment.id=maxid
+    insertcomment.like=0
+    insertcomment.time=thistime
+    insertcomment.delete=0
+    return "good boy"
