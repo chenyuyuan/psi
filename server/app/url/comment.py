@@ -40,8 +40,23 @@ def answer():
 @bcomment.route('/comment/answer/submit',methods=['GET','POST'])
 def anscommentsubmit():
     thistime = int(time.time())
+    #请求参数
+    req=request.get_json()
+    print(req["content"])
     #获取anscomment最大id
+    #uid=session["uid"]
+    uid = 3
+    myname=''
+    users=models.user.query.all()
+    for key in users:
+        if key.id==uid:
+            myname=key.account
+    print("uid:"+str(uid))
+    fid=0
     anscomment=models.ansComment.query.all()
+    for key in anscomment:
+        if key.id==req["pid"]:
+            fid=key.uid
     maxid=anscomment[len(anscomment)-1].id
     maxid=maxid+1
     insertcomment=models.ansComment()
@@ -49,4 +64,16 @@ def anscommentsubmit():
     insertcomment.like=0
     insertcomment.time=thistime
     insertcomment.delete=0
-    return "good boy"
+    insertcomment.content=req["content"]
+    insertcomment.pid=req["pid"]
+    insertcomment.uid=uid
+    insertcomment.fid=fid
+    insertcomment.ansid=req["ansid"]
+    db.session.add(insertcomment)
+    db.session.commit()
+    count=0
+    for key in anscomment:
+        if key.id==req["pid"]:
+            break
+        count=count+1
+    return json.dumps({"msg":"good","count":count,"myname":myname,"myuid":uid,"content":req["content"],"time":thistime,"data":{"id":"1"}})
