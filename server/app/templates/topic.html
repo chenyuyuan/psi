@@ -207,7 +207,7 @@
         $(".commentclick").on("click",function () {
             var kingdom=$(this).parent().next().next();
             var pt = new ParentTree();
-            var ansid=$(this).attr("name")//得到点击的回答id
+            ansid=$(this).attr("name")//得到点击的回答id
             //alert(ansid)
             if(kingdom.css("display")=="none"&&kingdom.attr("name")=="0"){
                 kingdom.attr("name","1")
@@ -239,9 +239,10 @@
                             }
                         }
                         maxDepth=0;
+                        //alert(ansid)
                         commentinput="                        <div class=\"input-group\" style=\"margin-top: 10px;\">\n" +
                             "                            <input type=\"text\" class=\"form-control\">\n" +
-                            "                            <span class=\"input-group-addon commentsubmit\" onclick='var a= $(this).prev().val();var b=$(this).parent().parent().attr(\"name\");$.ajax({url:\"http://127.0.0.1/anscommentsubmit\"})' style=\"background-color: #6db0ff;color:white;width: 50px\">回复</span>\n" +
+                            "                            <span class=\"input-group-addon commentsubmit\" onclick='var a= $(this).prev().val();var b=$(this).parent().parent().attr(\"name\");alert(ansid)' style=\"background-color: #6db0ff;color:white;width: 50px\">回复</span>\n" +
                             "                        </div>"
                         
                     //console.log(pt.nodes[1].data)
@@ -262,7 +263,7 @@
                 "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[i].data.like+"</span>\n" +
                 "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='$(this).parent().append(commentinput)' width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='replyanscomment' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='if($(this).parent().next().hasClass(\"input-group\")){ha=1}else{$(this).parent().append(commentinput)}' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class=\"pull-right\">"+pt.nodes[i].data.time+"</span>" +
                 "        </div>\n" +
