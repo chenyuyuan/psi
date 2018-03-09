@@ -77,3 +77,10 @@ def anscommentsubmit():
             break
         count=count+1
     return json.dumps({"msg":"good","count":count,"myname":myname,"myuid":uid,"content":req["content"],"time":thistime,"data":{"id":"1"}})
+@bcomment.route('/comment/answer/tipoff',methods=['GET','POST'])
+def anscommenttipoff():
+    data=request.get_json()
+    anscomment=models.ansComment.query.filter_by(id=data["anscomment"]).first()
+    anscomment.delete=1
+    db.session.commit()
+    return json.dumps({"msg":"good"})

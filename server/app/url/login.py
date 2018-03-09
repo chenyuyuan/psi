@@ -4,15 +4,24 @@ from flask import Flask, session, request,render_template,url_for
 from flask_bootstrap import Bootstrap
 from app import app
 from flask import Blueprint
-
+import json
+import time
 
 blogin=Blueprint('blogin', __name__)
 
 bootstrap=Bootstrap(app)
 app.secret_key = '~\xc8\xc6\xe0\xf3,\x98O\xa8z4\xfb=\rNd'
 
-@blogin.route('/login')
+@blogin.route("/login",methods=['GET','POST'])
 def login():
+    req=request.get_json()
+
+
+
+    return json.dumps({"msg":"good"})
+
+@blogin.route('/signin')
+def signin():
     uid = request.args.get('uid')
     psw = request.args.get('psw')
     if uid and psw:
@@ -26,8 +35,8 @@ def login():
                '<a href="http://127.0.0.1:3000/people">我的主页</a><br/>'
     return '<h1>login failed</h1>'
 
-@blogin.route('/logout')
-def logout():
+@blogin.route('/signout')
+def signout():
     if 'uid' in session:
         session.pop('uid')
     if '_login' in session:
@@ -35,21 +44,21 @@ def logout():
         return '<h1>logout succeed</h1>'
     return '<h1>logout failed<h1>'
 
-@blogin.route('/test_login')
+@blogin.route('/test/test_login')
 def test_login():
     if 'uid' in session:
         return '<h1>you are still in</h1>'
     else:
         return '<h1>you have logouted</h1>'
 
-@blogin.route('/who')
+@blogin.route('/test/who')
 def who():
     if session['uid']:
         return session['uid']
     else:
         return '<h1>you are no login!</h1>'
 
-@blogin.route('/bootstrap')
+@blogin.route('/test/bootstrap')
 def bootstrap(Resource):
     title='Bootstrap'
     return render_template('/main.html',title=title)

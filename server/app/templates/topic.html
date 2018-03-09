@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>话题</title>
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -124,11 +124,10 @@
                     <div id="thetopcomment" style="" name="0">
                         <div class="input-group" style="margin-top: 10px;">
                             <input type="text" class="form-control">
-                            <span class="input-group-addon" style="background-color: #6db0ff;color:white;width: 50px">发表</span>
+                            <span class="input-group-addon"  onclick='var content= $(this).prev().val();var ansid=$(this).parent().parent().prev().prev().find(".comment").attr("name");datas={"ansid":ansid,"content":content,"pid":-1};$.ajax({url:"http://127.0.0.1:3000/comment/answer/submit",type:"POST",data:JSON.stringify(datas),contentType:"application/json; charset=UTF-8",dataType:"json",success:function (data) {if(data.data["msg"]=="good"){alert("评论成功")}window.location.reload() },error:function(a,b,c) {console.log(a.status+"::"+a.readyState+"::"+b) }})' style="background-color: #6db0ff;color:white;width: 50px">发表</span>
                         </div>
                     </div>
                 </div>
-
                 {%endfor%}
                 <ul class="pagination" style="margin-left: 30px;margin-right: 30px">
                     <li>
@@ -202,7 +201,6 @@
 </div>
 <script type="text/javascript">
     function ParentTree() {this.nodes = [];}function ParentTreeNode(data, parent) {this.data = data || null;this.parent = parent || 0;}
-
     $(document).ready(function () {
         $(".comment").on("click",function () {
             var kingdom=$(this).parent().next().next();
@@ -256,7 +254,7 @@
                     }
                     commentinput="                        <div class=\"input-group\" style=\"margin-top: 10px;\">\n" +
                             "                            <input type=\"text\" class=\"form-control\">\n" +
-                            "                            <span class=\"input-group-addon commentsubmit\" onclick='k=$(this); var a= $(this).prev().val();var b=$(this).parent().parent().attr(\"name\");datas={\"ansid\":ansid,\"content\":a,\"pid\":b};$.ajax({url:\"http://127.0.0.1:3000/comment/answer/submit\",type:\"POST\",data:JSON.stringify(datas),contentType:\"application/json; charset=UTF-8\",dataType:\"json\",success:function (data) {window.location.reload() },error:function(a,b,c) {console.log(a.status+\"::\"+a.readyState+\"::\"+b) }})' style=\"background-color: #6db0ff;color:white;width: 50px\">回复</span>\n" +
+                            "                            <span class=\"input-group-addon commentsubmit\" onclick='k=$(this); var a= $(this).prev().val();var b=$(this).parent().parent().attr(\"name\");datas={\"ansid\":ansid,\"content\":a,\"pid\":b};$.ajax({url:\"http://127.0.0.1:3000/comment/answer/submit\",type:\"POST\",data:JSON.stringify(datas),contentType:\"application/json; charset=UTF-8\",dataType:\"json\",success:function (data) {if(data.data.msg==\"good\"){alert(\"回复成功\")}window.location.reload() },error:function(a,b,c) {console.log(a.status+\"::\"+a.readyState+\"::\"+b) }})' style=\"background-color: #6db0ff;color:white;width: 50px\">回复</span>\n" +
                             "                        </div>"
                     for(var i in pt.nodes){
                         if(pt.nodes[i].parent==-1){
@@ -265,11 +263,8 @@
                 "            <img src=\"http://127.0.0.1:3000/static/userhead/"+pt.nodes[i].data.uid+".jpg\" style=\"width: 15px\">\n" +
                 "            <span>"+pt.nodes[i].data.account+":</span>\n" +
                 "            <span>"+pt.nodes[i].data.content+"</span>\n" +
-                "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[i].data.like+"</span>\n" +
-                "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <img class='replyanscomment' name='0' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='if($(this).attr(\"name\")==\"0\"){$(this).parent().append(commentinput);$(this).attr(\"name\",\"1\")}else{if($(this).next().next().next().css(\"display\")==\"none\"){$(this).next().next().next().css(\"display\",\"\")}else{$(this).next().next().next().css(\"display\",\"none\")}}' width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" onclick='var  id=$(this).parent().attr(\"name\"); datas={\"anscomment\":id};$.ajax({url:\"http://127.0.0.1:3000/comment/answer/tipoff\",type:\"POST\",data:JSON.stringify(datas),contentType:\"application/json; charset=UTF-8\",dataType:\"json\",success:function(data) { if(data.msg==\"good\"){alert(\"已举报\")} },error:function(a,b,c) {console.log(a.status+\"::\"+a.readyState+\"::\"+b) }})' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class=\"pull-right\">"+pt.nodes[i].data.time+"</span>" +
                 "        </div>\n" +
                 "    </div>")
@@ -283,11 +278,8 @@
                 "            <img src=\"http://127.0.0.1:3000/static/userhead/"+pt.nodes[p].data.uid+".jpg\" style=\"width: 15px\" style='margin-left: 5px'>\n" +
                 "            <span>"+pt.nodes[p].data.account+":</span>\n" +
                 "            <span>"+pt.nodes[p].data.content+"</span>\n" +
-                "            <img class='likeanscomment' src=\"http://127.0.0.1:3000/static/material/like.jpg\" onmouseover='if($(this).attr(\"width\")==\"13px\"){$(this).attr(\"width\",\"14px\")}else{$(this).attr(\"width\",\"13px\")}' width=\"13px\" style='margin-left: 5px'>\n" +
-                "            <span class='text-muted' style='font-size: 12px;'>"+pt.nodes[p].data.like+"</span>\n" +
-                "            <img class='unlikeanscomment' src=\"http://127.0.0.1:3000/static/material/unlike.jpg\" width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <img class='replyanscomment' name='0' src=\"http://127.0.0.1:3000/static/material/reply.jpg\" onclick='if($(this).attr(\"name\")==\"0\"){$(this).parent().append(commentinput);$(this).attr(\"name\",\"1\")}else{if($(this).next().next().next().css(\"display\")==\"none\"){$(this).next().next().next().css(\"display\",\"\")}else{$(this).next().next().next().css(\"display\",\"none\")}}' style='margin-left: 5px'>\n" +
-                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" width=\"13px\" style='margin-left: 5px'>\n" +
+                "            <img class='tipoffanscomment' src=\"http://127.0.0.1:3000/static/material/tipoff.png\" onclick='var  id=$(this).parent().attr(\"name\"); datas={\"anscomment\":id};$.ajax({url:\"http://127.0.0.1:3000/comment/answer/tipoff\",type:\"POST\",data:JSON.stringify(datas),contentType:\"application/json; charset=UTF-8\",dataType:\"json\",success:function(data) { if(data.msg==\"good\"){alert(\"已举报\")} },error:function(a,b,c) {console.log(a.status+\"::\"+a.readyState+\"::\"+b) }})' width=\"13px\" style='margin-left: 5px'>\n" +
                 "            <span class=\"pull-right\">"+pt.nodes[p].data.time+"</span>" +
                 "        </div>\n" +
                 "    </div>")
