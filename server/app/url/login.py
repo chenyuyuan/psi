@@ -12,13 +12,62 @@ blogin=Blueprint('blogin', __name__)
 bootstrap=Bootstrap(app)
 app.secret_key = '~\xc8\xc6\xe0\xf3,\x98O\xa8z4\xfb=\rNd'
 
-@blogin.route("/login",methods=['GET','POST'])
-def login():
+@blogin.route('/logingin',methods=['GET','POST'])
+def logingin():
     req=request.get_json()
+    account=req["account"]
+    password=req["password"]
+    users=models.user.query.all()
+    uid=''
+    for key in users:
+        if key.account==account:
+            if key.password==password:
+                uid=key.id
+                session['uid']=uid
+                session['_login']=True
+                return json.dumps({"msg":"canlogin"})
+            else:
+                return json.dumps({"msg":"wrongpassword"})
+    return json.dumps({"msg":"nosuchaccount"})
+@blogin.route('/registering',methods=['GET','POST'])
+def registering():
+    thistime = int(time.time())
+    req=request.get_json()
+    account=req["account"]
+    password=req["password"]
+    users=models.user.query.all()
+    maxid = users[len(users) - 1].id
+    maxid = maxid + 1
+    for key in users:
+        if key.account==account:
+            return json.dumps({"msg":"accountexisting"})
+    user=models.user()
+    user.id=maxid
+    user.account=account
+    user.password=password
+    user.grade=''
+    user.shortIntro=''
+    user.head=''
+    user.follow=0
+    user.follower=0
+    user.major=''
+    user.time=thistime
+    user.sex=''
+    user.likeCount=0
+    user.starCount=0
+    db.session.add(user)
+    db.session.commit()
+    return json.dumps({"msg":"registered"})
+@blogin.route('/login',methods=['GET','POST'])
+def login():
+    return render_template('login.html')
+@blogin.route('/register',methods=['GET','POST'])
+def register():
+
+    return render_template('register.html')
 
 
 
-    return json.dumps({"msg":"good"})
 
 @blogin.route('/signin')
 def signin():
@@ -36,7 +85,7 @@ def signin():
     return '<h1>login failed</h1>'
 
 @blogin.route('/signout')
-def signout():
+def signtout():
     if 'uid' in session:
         session.pop('uid')
     if '_login' in session:
