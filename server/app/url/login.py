@@ -1,6 +1,6 @@
 from app import db, models
 from flask_restful import Resource, Api, reqparse, abort
-from flask import Flask, session, request,render_template,url_for
+from flask import Flask, session, request,render_template,redirect,url_for
 from flask_bootstrap import Bootstrap
 from app import app
 from flask import Blueprint
@@ -65,8 +65,14 @@ def login():
 def register():
 
     return render_template('register.html')
-
-
+@blogin.route('/logout',methods=['GET','POST'])
+def logout():
+    if 'uid' in session:
+        session.pop('uid')
+    if '_login' in session:
+        session.pop('_login')
+        return render_template('login.html')
+    return redirect(url_for('bhome.home'))
 
 
 @blogin.route('/signin')
@@ -85,7 +91,7 @@ def signin():
     return '<h1>login failed</h1>'
 
 @blogin.route('/signout')
-def signtout():
+def signout():
     if 'uid' in session:
         session.pop('uid')
     if '_login' in session:
