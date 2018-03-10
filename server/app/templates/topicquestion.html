@@ -116,13 +116,13 @@
                             </div>
                         </div>
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <span style="font-size: 16px;font-weight: bold">讨论</span>
-                    <span name="{{topicid}}" style="font-size: 16px;margin-left: 40px" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'question'">等待回答</span>
+                    <span name="{{topicid}}" style="font-size: 16px" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'/hotanswer'">讨论</span>
+                    <span name="{{topicid}}" style="font-size: 16px;margin-left: 40px;font-weight: bold" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'/question'">等待回答</span>
                     <span class="pull-right text-muted"><=>切换为按时间排序</span>
                     </div>
-                {%for key in answered%}
+                {%for key in question%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                   <span style="font-weight: bold;font-size: 20px">{{key.queTitle}}</span>
+                   <span style="font-weight: bold;font-size: 20px">{{key.question}}</span>
                     <br/>
                     <p class="text-muted" style="font-size: 14px">发布于{{key.time}}</p>
                     <div>

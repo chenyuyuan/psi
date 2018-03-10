@@ -70,6 +70,7 @@ def submitquestion():
     req=request.get_json()
     questiontitle=req["question"]
     questioncontent=req["questioncontent"]
+    print(questioncontent)
     topicid=req["topicid"]
     uid=session["uid"]
     questions=models.question.query.all()

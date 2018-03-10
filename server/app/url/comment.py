@@ -44,8 +44,7 @@ def anscommentsubmit():
     req=request.get_json()
     print(req["content"])
     #获取anscomment最大id
-    #uid=session["uid"]
-    uid = 3
+    uid=session["uid"]
     myname=''
     users=models.user.query.all()
     for key in users:

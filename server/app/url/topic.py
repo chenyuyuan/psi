@@ -62,47 +62,40 @@ def test(topicid):
 def topicquestion(topicid):
     answercontent = []
     thistopic = models.topic.query.filter_by(id=topicid).first()
-    sql = "select *  from answer where topicid="+topicid
+    sql = "select *  from question where reltopicid="+topicid
     answer = list()
-    answered=[]
-    answer = db.session.execute(sql)
+    question=[]
+    question0 = db.session.execute(sql)
     uid =session['uid']
     user=models.user.query.filter_by(id=uid).first()
     username=user.account
     users=models.user.query.all()
     count=0
-    for key in answer:
-        for k in users:
-            if k.id==key.uid:
-                answered.append({
-                    "id":key.id,
-                    "qid":key.qid,
-                    "like":key.like,
-                    "comCount":key.comCount,
-                    "uid":key.uid,
-                    "account":k.account,
-                    "shortIntro":k.shortIntro,
-                    "time":time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(key.time)),
-                    "score":key.score,
-                    "queTitle":key.queTitle,
-                    "topicid":key.topicid,
-                    "delete":key.delete
-                })
-                break
-    print(answered)
-    answered=answered[::-1]
-    for key in answered:
-        with open("C://Users//梅西//Desktop//forserver//answer//"+str(key['id'])+".txt","r+") as f:
-            h=f.read()
-        answered[count]["content"]=h
-        count=count+1
+    for key in question0:
+        question.append({
+            "id": key.id,
+            "question": key.question,
+            "like": key.like,
+            "ansCount": key.ansCount,
+            "uid": key.uid,
+            "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+            "score": key.score,
+            "watch":key.watch,
+            "reltopicid": key.reltopicid,
+            "followerCount":key.followerCount,
+            "queContent":key.queContent,
+            "delete": key.delete
+        })
+
+    print(question)
+    question=question[::-1]
     topicstar = models.topicStar.query.filter_by(uid=uid,topicid=topicid).first()
     thisstar=False
     if topicstar:
         thisstar=True
     print(thisstar)
     print(str(uid)+"+"+str(topicid))
-    return render_template('/topicquestion.html',title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/topicquestion.html',title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,question=question)
 
 @btopic.route('/topic/star',methods=['GET','POST'])
 def staringtopic():
@@ -136,6 +129,19 @@ def staringtopic():
             topicstar.uid = 0
         db.session.commit()
         return json.dumps({"msg":"cancelok"})
-
+@btopic.route('/answer/star', methods=['GET', 'POST'])
+def answerstar():
+    req=request.get_json()
+    ansid=req["ansid"]
+    uid=session["uid"]
+    ansstarall=models.ansStar.query.all()
+    maxid=ansstarall[len(ansstarall)-1].id+1
+    ansstar=models.ansStar()
+    ansstar.id=maxid
+    ansstar.uid=uid
+    ansstar.ansid=ansid
+    db.session.add(ansstar)
+    db.session.commit()
+    return json.dumps({"msg":"ok"})
 
 

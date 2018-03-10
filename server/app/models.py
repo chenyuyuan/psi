@@ -31,6 +31,7 @@ class question(db.Model):
     score=db.Column()
     ansCount=db.Column()
     delete=db.Column()
+    queContent=db.Column()
 
 class answer(db.Model):
     __tablename__='answer'
