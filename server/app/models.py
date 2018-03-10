@@ -156,6 +156,18 @@ class artComment(db.Model):
     artid=db.Column()
     delete=db.Column()
 
+class ansLike(db.Model):
+    __tablename__='ansLike'
+    id=db.Column(primary_key=True)
+    uid=db.Column()
+    ansid=db.Column()
+
+class queLike(db.Model):
+    __tablename__='queLike'
+    id=db.Column(primary_key=True)
+    uid=db.Column()
+    queid=db.Column()
+
 class tempTopic(db.Model):
     __tablename__='temptopic'
     id=db.Column(primary_key=True)

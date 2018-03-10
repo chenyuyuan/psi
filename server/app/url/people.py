@@ -9,8 +9,17 @@ from flask import Blueprint
 
 bpeople=Blueprint('bpeople', __name__)
 
-@bpeople.route('/people/me/')
+@bpeople.route('/people/me/myask')
 def people():
     uid=session["uid"]
     users=models.user.query.all()
-    return render_template('/pageofmine.html', title='我的主页', users=users)
+    user={}
+    for key in users:
+        if key.id==uid:
+            user=key
+    question=models.question.query.all()
+    return render_template('/pageofmine.html', title='我的主页', users=users,user=user)
+@bpeople.route('/people/<uid>/ask')
+def others(uid):
+
+    return render_template('/pageofothers.html')

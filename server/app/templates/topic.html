@@ -62,7 +62,7 @@
                             <img data-toggle="dropdown" src="http://127.0.0.1:3000/static/userhead/{{uid}}.jpg" style="width:28px">
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="http://127.0.0.1:3000/people">个人主页</a>
+                                    <a href="http://127.0.0.1:3000/people/me/myask">个人主页</a>
                                 </li>
                                 <li class="divider">
                                 </li>
@@ -122,20 +122,27 @@
                     </div>
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                   <span style="font-weight: bold;font-size: 20px">{{key.queTitle}}</span>
+                   <span style="font-weight: bold;font-size: 20px" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/question/'+$(this).attr('name')+'/hotanswer'">{{key.queTitle}}</span>
                     <br/>
-                    <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 25px">
-                    <span style="font-size: 18px;font-family: 'Helvetica Neue';">{{key.account}}</span>
+                    <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 25px" name="{{uid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">
+                    <span style="font-size: 18px;font-family: 'Helvetica Neue';" name="{{uid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">{{key.account}}</span>
                     <span class="text-muted">,{{key.shortIntro}}</span>
                     <p class="text-muted" style="font-size: 14px">{{key.like}}人赞同了该答案</p>
                     <p style="font-size: 15px;line-height: 24px">{{key.content}}</p>
                     <p class="text-muted" style="font-size: 14px">发布于{{key.time}}</p>
                     <div>
-                        <span class="text-info" style="background-color:#e5f2ff;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲132</span>
-                        <span class="text-info" style="background-color:#e5f2ff;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▼</span>
+                        {% if key.ilike=="0" %}
+                        <span class="text-info anslike" name="0_{{key.id}}" style="background-color:#99fffb;padding:6px 12px 6px 12px;border: #51c5f7 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲{{key.like}}</span>
+                        {% else %}
+                        <span class="text-info anslike" name="1_{{key.id}}" style="background-color:#00b0e4;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲{{key.like}}</span>
+                        {% endif %}
                         <span id="comment{{key.id}}" class="text-muted comment" name="{{key.id}}" style="margin-left: 20px;">{{key.comCount}}条评论</span>
                         <span class="text-muted" style="margin-left: 20px;">分享</span>
-                        <span class="text-muted answerstar" name="{{key.id}}" style="margin-left: 20px;">收藏</span>
+                        {%if key.istar=="0"%}
+                        <span class="text-muted answerstar" name="0_{{key.id}}" style="margin-left: 20px;">收藏</span>
+                        {% elif key.istar=="1" %}
+                        <span class="text-muted answerstar" name="1_{{key.id}}" style="margin-left: 20px;">取消收藏</span>
+                        {% endif %}
                         <span class="text-muted" style="margin-left: 20px;">•••</span>
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
@@ -220,6 +227,39 @@
 <script type="text/javascript">
     function ParentTree() {this.nodes = [];}function ParentTreeNode(data, parent) {this.data = data || null;this.parent = parent || 0;}
     $(document).ready(function () {
+        //回答点赞
+        $(".anslike").click(function () {
+            a=$(this).attr("name");
+            console.log(a);
+            flag=a[0]
+            answerid=''
+            for(var key in a){
+                if(key>1){
+                    answerid=answerid+a[key]
+                }
+            }
+            data={
+                "flag":flag,
+                "ansid":answerid
+            }
+            $.ajax({
+                url:"http://127.0.0.1:3000/answer/like",
+                type:"POST",
+                dataType:"json",
+                data:JSON.stringify(data),
+                contentType:"application/json; charset=UTF-8",
+                success:function (data) {
+                  if(data.msg=="liked")  {
+                      alert("liked")
+                      window.location.reload()
+                  }
+                  else if(data.msg=="canceled"){
+                      alert("canceled")
+                      window.location.reload()
+                  }
+                },
+            })
+        })
         //回答框显示
         $("#ask").click(function () {
             display=$("#asking").css("display")
@@ -232,9 +272,17 @@
         })
         //收藏回答
         $(".answerstar").click(function () {
-            answerid=$(this).attr("name");
+            a=$(this).attr("name");
+            flag=a[0]
+            answerid=''
+            for(var key in a){
+                if(key>1){
+                    answerid=answerid+a[key]
+                }
+            }
             console.log(answerid);
             data={
+                "flag":flag,
                 "ansid":answerid
             }
             $.ajax({
@@ -244,8 +292,13 @@
                 data:JSON.stringify(data),
                 contentType:"application/json; charset=UTF-8",
                 success:function (data) {
-                  if(data.msg=="ok")  {
-                      alert("ok")
+                  if(data.msg=="stared")  {
+                      alert("stared")
+                      window.location.reload()
+                  }
+                  else if(data.msg=="canceled"){
+                      alert("canceled")
+                      window.location.reload()
                   }
                 },
             })
