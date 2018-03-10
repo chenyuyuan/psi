@@ -117,33 +117,24 @@
                         </div>
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
                     <span style="font-size: 16px;font-weight: bold">讨论</span>
-                    <span name="{{topicid}}" style="font-size: 16px;margin-left: 40px" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'/question'">等待回答</span>
+                    <span name="{{topicid}}" style="font-size: 16px;margin-left: 40px" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'question'">等待回答</span>
                     <span class="pull-right text-muted"><=>切换为按时间排序</span>
                     </div>
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
                    <span style="font-weight: bold;font-size: 20px">{{key.queTitle}}</span>
                     <br/>
-                    <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 25px">
-                    <span style="font-size: 18px;font-family: 'Helvetica Neue';">{{key.account}}</span>
-                    <span class="text-muted">,{{key.shortIntro}}</span>
-                    <p class="text-muted" style="font-size: 14px">{{key.like}}人赞同了该答案</p>
-                    <p style="font-size: 15px;line-height: 24px">{{key.content}}</p>
                     <p class="text-muted" style="font-size: 14px">发布于{{key.time}}</p>
                     <div>
                         <span class="text-info" style="background-color:#e5f2ff;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲132</span>
                         <span class="text-info" style="background-color:#e5f2ff;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▼</span>
-                        <span id="comment{{key.id}}" class="text-muted comment" name="{{key.id}}" style="margin-left: 20px;">{{key.comCount}}条评论</span>
                         <span class="text-muted" style="margin-left: 20px;">分享</span>
                         <span class="text-muted" style="margin-left: 20px;">收藏</span>
                         <span class="text-muted" style="margin-left: 20px;">•••</span>
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
                     <div id="thetopcomment" style="" name="0">
-                        <div class="input-group" style="margin-top: 10px;">
-                            <input type="text" class="form-control">
-                            <span class="input-group-addon"  onclick='var content= $(this).prev().val();var ansid=$(this).parent().parent().prev().prev().find(".comment").attr("name");datas={"ansid":ansid,"content":content,"pid":-1};$.ajax({url:"http://127.0.0.1:3000/comment/answer/submit",type:"POST",data:JSON.stringify(datas),contentType:"application/json; charset=UTF-8",dataType:"json",success:function (data) {if(data.data["msg"]=="good"){alert("评论成功")}window.location.reload() },error:function(a,b,c) {console.log(a.status+"::"+a.readyState+"::"+b) }})' style="background-color: #6db0ff;color:white;width: 50px">发表</span>
-                        </div>
+                    
                     </div>
                 </div>
                 {%endfor%}

@@ -18,6 +18,7 @@ def test(topicid):
     answer = db.session.execute(sql)
     uid =session['uid']
     user=models.user.query.filter_by(id=uid).first()
+    username=user.account
     users=models.user.query.all()
     count=0
     for key in answer:
@@ -55,7 +56,53 @@ def test(topicid):
         thisstar=True
     print(thisstar)
     print(str(uid)+"+"+str(topicid))
-    return render_template('/topic.html', title='话题',thisstar=thisstar,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/topic.html', title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+
+@btopic.route('/topic/<topicid>/question',methods=['GET','POST'])
+def topicquestion(topicid):
+    answercontent = []
+    thistopic = models.topic.query.filter_by(id=topicid).first()
+    sql = "select *  from answer where topicid="+topicid
+    answer = list()
+    answered=[]
+    answer = db.session.execute(sql)
+    uid =session['uid']
+    user=models.user.query.filter_by(id=uid).first()
+    username=user.account
+    users=models.user.query.all()
+    count=0
+    for key in answer:
+        for k in users:
+            if k.id==key.uid:
+                answered.append({
+                    "id":key.id,
+                    "qid":key.qid,
+                    "like":key.like,
+                    "comCount":key.comCount,
+                    "uid":key.uid,
+                    "account":k.account,
+                    "shortIntro":k.shortIntro,
+                    "time":time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(key.time)),
+                    "score":key.score,
+                    "queTitle":key.queTitle,
+                    "topicid":key.topicid,
+                    "delete":key.delete
+                })
+                break
+    print(answered)
+    answered=answered[::-1]
+    for key in answered:
+        with open("C://Users//梅西//Desktop//forserver//answer//"+str(key['id'])+".txt","r+") as f:
+            h=f.read()
+        answered[count]["content"]=h
+        count=count+1
+    topicstar = models.topicStar.query.filter_by(uid=uid,topicid=topicid).first()
+    thisstar=False
+    if topicstar:
+        thisstar=True
+    print(thisstar)
+    print(str(uid)+"+"+str(topicid))
+    return render_template('/topicquestion.html',title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
 
 @btopic.route('/topic/star',methods=['GET','POST'])
 def staringtopic():

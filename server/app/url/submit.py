@@ -64,4 +64,36 @@ def topicstar():
         print('chenggong')
         return json.dumps({'msg':True,'id':'1'})
 
+@bsubmit.route('/submit/question', methods=['GET', 'POST'])
+def submitquestion():
+    thistime=int(time.time())
+    req=request.get_json()
+    questiontitle=req["question"]
+    questioncontent=req["questioncontent"]
+    topicid=req["topicid"]
+    uid=session["uid"]
+    questions=models.question.query.all()
+    maxid=questions[len(questions)-1].id+1
+    question=models.question()
+    question.id=maxid
+    question.question=questiontitle
+    question.like=0
+    question.ansCount=0
+    question.uid=uid
+    question.picture=0
+    question.time=thistime
+    question.watch=0
+    question.reltopicid=topicid
+    question.followerCount=0
+    question.score=0
+    question.queContent=questioncontent
+    question.delete=0
+    db.session.add(question)
+    db.session.commit()
+    topic=models.topic.query.filter_by(id=topicid).first()
+    if topic:
+        topic.queCount=topic.queCount+1
+    db.session.commit()
+    return json.dumps({"msg":"ok"})
+
 
