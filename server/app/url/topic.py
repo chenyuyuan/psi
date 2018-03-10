@@ -12,7 +12,7 @@ btopic=Blueprint('btopic', __name__)
 def test(topicid):
     answercontent = []
     thistopic = models.topic.query.filter_by(id=topicid).first()
-    sql = "select *  from answer where topicid=1"
+    sql = "select *  from answer where topicid="+topicid
     answer = list()
     answered=[]
     answer = db.session.execute(sql)
@@ -65,6 +65,7 @@ def staringtopic():
     #flag=1进行关注话题
     topictitle=models.topic.query.filter_by(id=topicid).first()
     title=topictitle.topic
+    print(title)
     alltopicstar=models.topicStar.query.all()
     maxid=alltopicstar[len(alltopicstar)-1].id+1
     uid=session['uid']
@@ -73,7 +74,7 @@ def staringtopic():
         topicstar.id=maxid
         topicstar.uid=uid
         topicstar.topicid=topicid
-        topicstar.title=title
+        topicstar.topic=title
         db.session.add(topicstar)
         db.session.commit()
         thistopic=models.topic.query.filter_by(id=topicid).first()
