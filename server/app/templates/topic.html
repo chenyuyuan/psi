@@ -122,7 +122,7 @@
                     </div>
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                   <span style="font-weight: bold;font-size: 20px" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/question/'+$(this).attr('name')+'/hotanswer'">{{key.queTitle}}</span>
+                   <span style="font-weight: bold;font-size: 20px" name="{{key.qid}}" onclick="window.location.href='http://127.0.0.1:3000/question/'+$(this).attr('name')+'/hotanswer'">{{key.queTitle}}</span>
                     <br/>
                     <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 25px" name="{{uid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">
                     <span style="font-size: 18px;font-family: 'Helvetica Neue';" name="{{uid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">{{key.account}}</span>
@@ -452,10 +452,10 @@
             })
             }
             else if(kingdom.css("display")=="none"&&kingdom.attr("name")=="1"){
-                //kingdom.css("display","");
+                kingdom.css("display","");
             }
             else{
-                //kingdom.css("display","none");
+                kingdom.css("display","none");
             }
         })
         // $('#share').click(function () {

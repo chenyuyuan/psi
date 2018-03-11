@@ -11,24 +11,38 @@ bquestion=Blueprint('bquestion', __name__)
 
 @bquestion.route('/question/<questionid>/hotanswer')
 def test(questionid):
+    #print(questionid)
+    uid = session['uid']
     answercontent = []
     #本问题页的问题的基本信息
-    thisquestion = models.topic.query.filter_by(id=questionid).first()
-    sql = "select *  from answer where qid=1"
+    thisquestion = models.question.query.filter_by(id=questionid).first()
+    flag0="0"
+    if models.queStar.query.filter_by(uid=uid,queid=questionid).first():
+        flag0="1"
+    thistopic=models.topic.query.filter_by(id=thisquestion.reltopicid).first()
+    sql = "select *  from answer where qid="+questionid
     answer = list()
     answered=[]
     answer = db.session.execute(sql)
-    # uid = session['uid']
-    # user=models.user.query.filter_by(id=uid).first()
+    user=models.user.query.filter_by(id=uid).first()
     users=models.user.query.all()
     count=0
     for key in answer:
         for k in users:
             if k.id==key.uid:
+                flag = "0"
+                flag2 = "0"
+                if models.ansLike.query.filter_by(uid=uid, ansid=key.id).first():
+                    flag = "1"
+                if models.ansStar.query.filter_by(uid=uid, ansid=key.id).first():
+                    print("查到")
+                    flag2 = "1"
                 answered.append({
                     "id":key.id,
                     "qid":key.qid,
                     "like":key.like,
+                    "ilike":flag,
+                    "istar":flag2,
                     "comCount":key.comCount,
                     "uid":key.uid,
                     "account":k.account,
@@ -53,4 +67,4 @@ def test(questionid):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/question.html', title='问题',users=users,questionid=questionid,thisquestion=thisquestion,answered=answered,answercontent=answercontent)
+    return render_template('/question.html', title='问题',users=users,flag0=flag0,questionid=questionid,thistopic=thistopic,thisquestion=thisquestion,answered=answered,answercontent=answercontent)
