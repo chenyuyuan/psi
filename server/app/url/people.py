@@ -9,7 +9,7 @@ from flask import Blueprint
 
 bpeople=Blueprint('bpeople', __name__)
 
-@bpeople.route('/people/me/myask')
+@bpeople.route('/people/me/myask',methods=['GET','POST'])
 def people():
     uid=session["uid"]
     users=models.user.query.all()
@@ -19,7 +19,7 @@ def people():
         if key.id==uid:
             user=key
     questions=models.question.query.all()
-    for key in question:
+    for key in questions:
         if key.uid==uid:
             flag="0"
             if models.queLike.query.filter_by(uid=uid, queid=key.id).first():
