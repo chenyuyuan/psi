@@ -89,14 +89,14 @@
                 <div class="shadow-smaller" style="position: fixed;width: 1010px;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left:-4px;margin-bottom: 10px;margin-right:-43px;padding:15px;">
                     <img class="pull-left" src="http://127.0.0.1:3000/static/userhead/4.jpg" style="width: 120px;display: inline-block">
                     <span class="pull-right" style="margin-left: 22px;color:#77839c">编辑个人资料</span>
-                    <span class="pull-left" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;font-size: 30px;font-family: 'Microsoft JhengHei'">chenyuyuan</span>
-                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:15px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">简介</span>
+                    <span class="pull-left" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;font-size: 30px;font-family: 'Microsoft JhengHei'">{{user.account}}</span>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:15px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">{{user.shortIntro}}</span>
                     <br/>
                     <br/>
                     <br/>
-                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">专业  计算机科学与技术</span>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">专业  {{user.major}}</span>
                     <br/>
-                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">年级  大二</span>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">年级  {{user.grade}}</span>
                     <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
                     <div style="clear: both"></div>
                 </div>
