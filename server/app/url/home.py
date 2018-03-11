@@ -12,4 +12,7 @@ bhome=Blueprint('bhome', __name__)
 @bhome.route('/home')
 def home():
     title='home'
-    return render_template('home.html',title=title)
+    return render_template('/home.html',title=title)
+@bhome.route('/homeadmin')
+def homeadmin():
+    return render_template('/homeadmin.html')

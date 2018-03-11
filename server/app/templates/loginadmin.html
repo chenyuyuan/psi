@@ -46,7 +46,8 @@
 
       <div class="container">
           <div style="text-align: center;margin-bottom: 40px">
-              <span class="logo" style="color: #0d83ff">请登录</span>
+              <span class="logo" style="color: #0d83ff">请登录/</span>
+              <span class="logo" style="color: grey;font-size: 44px">管理员</span>
           </div>
           <input id="account" type="text" class="form-control center-block" placeholder="账号" style="width:300px;height: 48px">
           <input id="password" type="password" class="form-control center-block" placeholder="密码" style="width:300px;height: 48px;border-top: 0px">
@@ -62,7 +63,7 @@
       <p>Copyright © 2017 Knowledgeispower.net</p>
       <p>关于</p>
       <p class="pull-right"><a href="#top">回到顶部</a></p>
-      <a href="http://127.0.0.1:3000/loginadmin">管理员登录</a>
+      <a href="http://127.0.0.1:3000/login">用户登录</a>
     </footer>
   </div>
 <script type="text/javascript">
@@ -97,13 +98,13 @@
                 }
                 $.ajax({
                 type:'POST',
-                url:'http://127.0.0.1:3000/logingin',
+                url:'http://127.0.0.1:3000/loginginadmin',
                 contentType: 'application/json; charset=UTF-8',
                 data:JSON.stringify(data),
                 dataType:'json',
                 success:function (data) {
                     if(data["msg"]=="canlogin"){
-                        window.location.href="http://127.0.0.1:3000/home"
+                        window.location.href="http://127.0.0.1:3000/homeadmin"
                     }
                     else if(data["msg"]=="wrongpassword"){
                         $("#tips").html("密码错误")

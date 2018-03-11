@@ -177,6 +177,12 @@ class tempTopic(db.Model):
     support=db.Column()
     time=db.Column()
 
+class tempTopicSupport(db.Model):
+    __tablename__ = 'temptopicsupport'
+    id = db.Column(primary_key=True)
+    uid = db.Column()
+    temptopicid=db.Column()
+
 class hotTopic(db.Model):
     __tablename__='hottopic'
     id=db.Column(primary_key=True)

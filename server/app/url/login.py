@@ -29,6 +29,23 @@ def logingin():
             else:
                 return json.dumps({"msg":"wrongpassword"})
     return json.dumps({"msg":"nosuchaccount"})
+@blogin.route('/loginginadmin',methods=['GET','POST'])
+def loginginadmin():
+    req=request.get_json()
+    account=req["account"]
+    password=req["password"]
+    users=models.userAdmin.query.all()
+    uid=''
+    for key in users:
+        if key.account==account:
+            if key.password==password:
+                uid=key.id
+                session['uid']=uid
+                session['_login']=True
+                return json.dumps({"msg":"canlogin"})
+            else:
+                return json.dumps({"msg":"wrongpassword"})
+    return json.dumps({"msg":"nosuchaccount"})
 @blogin.route('/registering',methods=['GET','POST'])
 def registering():
     thistime = int(time.time())
@@ -63,7 +80,6 @@ def login():
     return render_template('login.html')
 @blogin.route('/register',methods=['GET','POST'])
 def register():
-
     return render_template('register.html')
 @blogin.route('/logout',methods=['GET','POST'])
 def logout():
@@ -73,7 +89,9 @@ def logout():
         session.pop('_login')
         return render_template('login.html')
     return redirect(url_for('bhome.home'))
-
+@blogin.route('/loginadmin',methods=['GET','POST'])
+def loginadmin():
+    return render_template('/loginadmin.html')
 
 @blogin.route('/signin')
 def signin():
@@ -89,31 +107,3 @@ def signin():
                '<a href="http://127.0.0.1:3000/articling">写文章</a><br/>' \
                '<a href="http://127.0.0.1:3000/people">我的主页</a><br/>'
     return '<h1>login failed</h1>'
-
-@blogin.route('/signout')
-def signout():
-    if 'uid' in session:
-        session.pop('uid')
-    if '_login' in session:
-        session.pop('_login')
-        return '<h1>logout succeed</h1>'
-    return '<h1>logout failed<h1>'
-
-@blogin.route('/test/test_login')
-def test_login():
-    if 'uid' in session:
-        return '<h1>you are still in</h1>'
-    else:
-        return '<h1>you have logouted</h1>'
-
-@blogin.route('/test/who')
-def who():
-    if session['uid']:
-        return session['uid']
-    else:
-        return '<h1>you are no login!</h1>'
-
-@blogin.route('/test/bootstrap')
-def bootstrap(Resource):
-    title='Bootstrap'
-    return render_template('/main.html',title=title)
