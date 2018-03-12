@@ -46,7 +46,7 @@
                     <span style="text-align: center;display: block;font-size: 16px">回答</span><hr/>
                     <span style="text-align: center;display: block;font-size: 16px">评论</span><hr/>
                     <span style="text-align: center;display: block;font-size: 16px">创建话题</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">退出登录</span><hr style="margin-bottom: 0px"/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/logoutadmin'" style="text-align: center;display: block;font-size: 16px">退出登录</span><hr style="margin-bottom: 0px"/>
                 </div>
 
             </div>
@@ -81,7 +81,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="http://127.0.0.1:3000/logout">退出登录</a>
+                                    <a href="http://127.0.0.1:3000/logoutadmin">退出登录</a>
                                 </li>
                             </ul>
                         </li>
@@ -101,10 +101,8 @@
             <div class="col-md-5 column" style="padding:0;margin: 2px">
 
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span id="toanswer" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问题</span>
-                    <span style="margin-left: 22px;border: #0084ff solid 0px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"><a href="http://127.0.0.1:3000/articling">写文章</a></span>
-                    <span class="pull-right" style="margin-left: 22px;color:#77839c">写草稿</span>
-                    <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
+                    <span id="toanswer" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">所有</span>
+                    <span class="pull-right" style="margin-left: 22px;color:#77839c">待处理</span>
                 </div>
                 <div id='answering' style="display: none">
                     <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
@@ -165,9 +163,9 @@
             </div>
             <div class="col-md-3 column" style="position: fixed;right:16%;padding: 0;margin: 2px">
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问题</span>
-                    <span style="margin-left: 22px;border: #0084ff solid 0px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"><a href="http://127.0.0.1:3000/articling">写文章</a></span>
-                    <span class="pull-right" style="margin-left: 22px;color:#77839c">写草稿</span>
+                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"></span>
+                    <span style="margin-left: 22px;border: #0084ff solid 0px;background-color: white;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"><a href="http://127.0.0.1:3000/articling"></a></span>
+                    <span class="pull-right" style="margin-left: 22px;color:#77839c"></span>
                     <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
                 </div>
             </div>

@@ -87,8 +87,16 @@ def logout():
         session.pop('uid')
     if '_login' in session:
         session.pop('_login')
-        return render_template('login.html')
+        return render_template('/login.html')
     return redirect(url_for('bhome.home'))
+@blogin.route('/logoutadmin',methods=['GET','POST'])
+def logoutadmin():
+    if 'uid' in session:
+        session.pop('uid')
+    if '_login' in session:
+        session.pop('_login')
+        return render_template('/loginadmin.html')
+    return redirect("http://127.0.0.1:3000/homeadmin")
 @blogin.route('/loginadmin',methods=['GET','POST'])
 def loginadmin():
     return render_template('/loginadmin.html')

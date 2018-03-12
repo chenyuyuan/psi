@@ -88,9 +88,19 @@
             <div class="col-md-8 column">
                 <div class="shadow-smaller" style="position: fixed;width: 1010px;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left:-4px;margin-bottom: 10px;margin-right:-43px;padding:15px;">
                     <img class="pull-left" src="http://127.0.0.1:3000/static/userhead/{{user.id}}.jpg" style="width: 120px;display: inline-block">
+                    {% if mine=="1" %}
                     <span class="pull-right editing" onclick="if($('.editchoose').css('display')=='none'){$('.editchoose').css('display','')}else{$('.editchoose').css('display','none')}" style="margin-left: 22px;color:#77839c">编辑个人资料</span>
+                    {% endif %}
                     <span class="pull-left" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;font-size: 30px;font-family: 'Microsoft JhengHei'">{{user.account}}</span>
                     <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:15px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">{{user.shortIntro}}</span>
+                    {% if mine=="0" and starhim=="0" %}
+                    <span class="pull-right follow" name="0_{{fid}}" style="margin-left: 22px;color:#77839c">关注他/她</span>
+                    {% elif mine=="0" and starhim=="1" %}
+                    <span class="pull-right follow" name="1_{{fid}}" style="margin-left: 22px;color:#77839c">取消关注</span>
+                    {% endif %}
+                    {% if mine=="0" %}
+                    <span class="pull-right sendmsg" onclick="if($('.send').css('display')=='none'){$('.send').css('display','')}else{$('.send').css('display','none')}" style="margin-left: 22px;color:#77839c">私信</span>
+                    {% endif %}
                     <br/>
                     <br/>
                     <br/>
@@ -109,7 +119,7 @@
             <div class="col-md-5 column" style="padding:0;margin: 2px">
 
                 <div class="shadow-smaller" style="position: fixed;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问</span>
+                    <span style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问</span>
                     <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">回答</span>
                     <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">评论</span>
                     <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏问题</span>
@@ -119,22 +129,19 @@
                     <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
                 </div>
                 <div style="margin-top: 60px"></div>
-                {%for key in question%}
+                {%for key in comment%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                   <span style="font-weight: bold;font-size: 20px" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/question/'+$(this).attr('name')+'/hotanswer'">{{key.question}}</span>
+                   <span style="font-weight: bold;font-size: 20px" name="{{key.qid}}" onclick="window.location.href='http://127.0.0.1:3000/question/'+$(this).attr('name')+'/hotanswer'">{{key.question}}</span>
                     <br/>
+                    <p style="font-size: 15px;line-height: 24px">{{key.content}}</p>
                     <p class="text-muted" style="font-size: 14px">发布于{{key.time}}</p>
                     <div>
-                        {% if key.ilike=="0" %}
-                        <span class="text-info quelike" name="0_{{key.id}}" style="background-color:#99fffb;padding:6px 12px 6px 12px;border: #51c5f7 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲{{key.like}}</span>
-                        {% else %}
-                        <span class="text-info quelike" name="1_{{key.id}}" style="background-color:#00b0e4;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲{{key.like}}</span>
-                        {% endif %}
-                        <span class="text-muted" style="margin-left: 20px;">分享</span>
-                        <span class="text-muted" style="margin-left: 20px;">•••</span>
-                    </div>
-                    <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
-                    <div id="thetopcomment" style="" name="0">
+                        <div name="{{key.id}}" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                            <div>
+                                <span>{{key.comcontent}}</span>
+                                <span class="pull-right">{{key.time}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {%endfor%}
@@ -204,6 +211,14 @@
                     </div>
                     <div style="clear:both"></div>
                 </div>
+                <div class="shadow-smaller send" style="display: none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <input id="msg" type="text" class="form-control center-block" placeholder="私信" style="width:300px;height: 48px">
+                        <p id="tips3" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="sendmsgs" name="{{fid}}" type="submit" class="btn btn-primary center-block" style="width:300px;height: 40px;margin-top: 20px">发送</button>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
                 
                 
             </div>
@@ -226,6 +241,65 @@
 </div>
 <script type="text/javascript" charset="UTF-8">
     $(document).ready(function () {
+          //私信
+        $("#sendmsgs").click(function () {
+            fid=$(this).attr("name")
+            msg=$("#msg").val()
+            tips3=$("#tips3")
+            if(msg==""){
+                tips3.html("请输入")
+            }
+            else{
+                data={
+                    "fid":fid,
+                    "msg":msg
+            }
+            $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:3000/people/send',
+                    contentType: 'application/json; charset=UTF-8',
+                    data:JSON.stringify(data),
+                    dataType:'json',
+                    success:function (data) {
+                        if(data["msg"]=="good"){
+                            tips3.html("已发送")
+                        }
+                        else if(data["msg"]=="no"){
+                            alert("no")
+                        }
+                    }
+                })
+            }
+        })
+        //关注
+        $(".follow").click(function () {
+            a=$(this).attr("name")
+            flag=a[0]
+            fid=''
+            for (var key in a){
+                if(key>1){
+                    fid=fid+a[key]
+                }
+            }
+            data={
+                "flag":flag,
+                "fid":fid
+            }
+            $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/people/follow',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    if(data["msg"]=="good"){
+                        window.location.reload()                        }
+                    else if(data["msg"]=="no"){
+                        alert("no")
+                    }
+                }
+            })
+        })
         //修改简介
         $('#submitinfo').click(function () {
             shortInfo=$('#shortintro').val()
