@@ -38,9 +38,6 @@ def home():
     
 
     return render_template('/home.html',user=user,myid=session["uid"],temptopic=temptopic)
-@bhome.route('/homeadmin')
-def homeadmin():
-    return render_template('/homeadmin.html')
 
 @bhome.route('/home/applyingtopic',methods=['GET','POST'])
 def applyingtopic():
@@ -64,6 +61,7 @@ def applyingtopic():
         db.session.add(temptopic)
         db.session.commit()
         return json.dumps({"msg":"good"})
+#首页支持话题申请
 @bhome.route('/home/supporting',methods=['GET','POST'])
 def supporting():
     thistime=int(time.time())
@@ -111,3 +109,20 @@ def supporting():
         temptopic.support=temptopic.support-1
         db.session.commit()
         return json.dumps({"msg":"canceled"})
+
+@bhome.route('/homeadmin')
+def homeadmin():
+    uid = session["uid"]
+    users = models.user.query.all()
+    user = []
+    for key in users:
+        user.append({
+            "id": key.id,
+            "account": key.account,
+            "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+            "shrtIntro": key.shortIntro,
+            "grade": key.grade,
+            "major": key.major,
+            "sex": key.sex
+        })
+    return render_template('/homeadmin/homeadmin.html', users=user)
