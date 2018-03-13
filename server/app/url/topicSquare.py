@@ -21,6 +21,6 @@ def test():
     # for key in mystartopic:
     #     print(key.topic)
 
-    return render_template('/topicSquare.html', title='话题广场',mystartopic=mystartopic,alltopic=alltopic)
+    return render_template('/topicSquare.html', title='话题广场',myid=session["uid"],mystartopic=mystartopic,alltopic=alltopic)
 
 

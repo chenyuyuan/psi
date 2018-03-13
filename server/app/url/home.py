@@ -37,7 +37,7 @@ def home():
     answers=models.answer.query.all()
     
 
-    return render_template('/home.html',user=user,temptopic=temptopic)
+    return render_template('/home.html',user=user,myid=session["uid"],temptopic=temptopic)
 @bhome.route('/homeadmin')
 def homeadmin():
     return render_template('/homeadmin.html')

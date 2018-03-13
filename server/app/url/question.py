@@ -67,4 +67,4 @@ def test(questionid):
         count=count+1
     # for key in answercontent:
     #      print('qq'+key+'\n')
-    return render_template('/question.html', title='问题',users=users,flag0=flag0,questionid=questionid,thistopic=thistopic,thisquestion=thisquestion,answered=answered,answercontent=answercontent)
+    return render_template('/question.html', title='问题',users=users,myid=session["uid"],flag0=flag0,questionid=questionid,thistopic=thistopic,thisquestion=thisquestion,answered=answered,answercontent=answercontent)

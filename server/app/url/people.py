@@ -37,7 +37,7 @@ def people():
                 "followerCount":key.followerCount,
                 "queContent":key.queContent
             })
-    return render_template('/pageofmine/pageofmine.html', title='我的主页',fid=uid,mine="1",type="question", users=users,user=user,question=question)
+    return render_template('/pageofmine/pageofmine.html', title='我的主页',fid=uid,myid=session["uid"],mine="1",type="question", users=users,user=user,question=question)
 #无
 @bpeople.route('/people/edit',methods=['GET','POST'])
 def edit():
@@ -111,7 +111,7 @@ def others(id):
                 "queContent":key.queContent
             })
     print(question)
-    return render_template('/pageofmine/pageofmine.html', title='我的主页',starhim=starhim,fid=uid,mine="0",type="question", users=users,user=user,question=question)
+    return render_template('/pageofmine/pageofmine.html', title='我的主页',starhim=starhim,fid=uid,myid=session["uid"],mine="0",type="question", users=users,user=user,question=question)
 #个人主页(回答)
 @bpeople.route('/people/<id>/answer',methods=['GET','POST'])
 def peopleanswer(id):
@@ -154,7 +154,7 @@ def peopleanswer(id):
                     h = f.read()
                 answer[count]["content"] = h
                 count = count + 1
-    return render_template('/pageofmine/pageofmineanswer.html', title='我的主页',mine=mine,starhim=starhim,fid=uid,type="question", users=users,user=user,answer=answer)
+    return render_template('/pageofmine/pageofmineanswer.html', title='我的主页',mine=mine,myid=session["uid"],starhim=starhim,fid=uid,type="question", users=users,user=user,answer=answer)
 #个人主页(收藏的回答)
 @bpeople.route('/people/<id>/answerstar',methods=['GET','POST'])
 def peopleanswerstar(id):
@@ -191,7 +191,7 @@ def peopleanswerstar(id):
             h = f.read()
         answer[count]["content"] = h
         count = count + 1
-    return render_template('/pageofmine/pageofmineanswerstar.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,type="question", users=users,user=user,answer=answer)
+    return render_template('/pageofmine/pageofmineanswerstar.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,type="question", users=users,user=user,answer=answer)
 #个人主页(收藏的问题)
 @bpeople.route('/people/<id>/questionstar',methods=['GET','POST'])
 def peoplequestionstar(id):
@@ -226,7 +226,7 @@ def peoplequestionstar(id):
                 "followerCount": key.followerCount,
                 "queContent": key.queContent
             })
-    return render_template('/pageofmine/pageofminequestionstar.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,type="question", users=users,user=user,question=question)
+    return render_template('/pageofmine/pageofminequestionstar.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,type="question", users=users,user=user,question=question)
 #个人主页(评论)
 @bpeople.route('/people/<id>/comment',methods=['GET','POST'])
 def peoplecomment(id):
@@ -263,7 +263,7 @@ def peoplecomment(id):
             h = f.read()
         comment[count]["content"] = h
         count = count + 1
-    return render_template('/pageofmine/pageofminecomment.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,type="question", users=users,user=user,comment=comment)
+    return render_template('/pageofmine/pageofminecomment.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,type="question", users=users,user=user,comment=comment)
 #关注好友接口
 @bpeople.route('/people/follow',methods=['GET','POST'])
 def peoplefollowing():
@@ -349,7 +349,7 @@ def peoplefollow(id):
                     "account":key.account,
                     "shortIntro":key.shortIntro,
                 })
-    return render_template('/pageofmine/pageofminefollow.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,myfollow=myfollow, users=users,user=user)
+    return render_template('/pageofmine/pageofminefollow.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,myfollow=myfollow, users=users,user=user)
 @bpeople.route('/people/<id>/follower',methods=['GET','POST'])
 def peoplefollower(id):
     uid=int(id)
@@ -380,7 +380,7 @@ def peoplefollower(id):
                     "shortIntro" : key.shortIntro,
                     "starhim":starhim2
                 })
-    return render_template('/pageofmine/pageofminefollower.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,myfollow=myfollow, users=users,user=user)
+    return render_template('/pageofmine/pageofminefollower.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,myfollow=myfollow, users=users,user=user)
 
 @bpeople.route('/people/<id>/msg',methods=['GET','POST'])
 def peoplemsg(id):
@@ -409,7 +409,7 @@ def peoplemsg(id):
                 "content":key.content,
                 "time":time.strftime("%m-%d %H:%M:%S", time.localtime(key.time)),
             })
-    return render_template('/pageofmine/pageofminemsg.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,msg=msg, users=users,user=user)
+    return render_template('/pageofmine/pageofminemsg.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,msg=msg, users=users,user=user)
 @bpeople.route('/people/<id>/msgsent',methods=['GET','POST'])
 def peoplemsgsent(id):
     uid=int(id)
@@ -437,9 +437,36 @@ def peoplemsgsent(id):
                 "content":key.content,
                 "time":time.strftime("%m-%d %H:%M:%S", time.localtime(key.time)),
             })
-    return render_template('/pageofmine/pageofminemsgsent.html', title='我的主页',fid=uid,starhim=starhim,mine=mine,msg=msg, users=users,user=user)
+    return render_template('/pageofmine/pageofminemsgsent.html', title='我的主页',fid=uid,myid=session["uid"],starhim=starhim,mine=mine,msg=msg, users=users,user=user)
 
 #删除评论接口
-@bpeople.route('/people/deletecomment',methods=['GET','POST'])
-def deletecomment():
-    pass
+@bpeople.route('/people/deleteit',methods=['GET','POST'])
+def deleteit():
+    req=request.get_json()
+    type=req["type"]
+    id=req["id"]
+    uid=session["uid"]
+    if type=="answer":
+        answer=models.answer.query.filter_by(id=id).first()
+        print(answer.id)
+        db.session.delete(answer)
+        db.session.commit()
+        return json.dumps({"msg":"good"})
+    if type=="comment":
+        comment=models.ansComment.query.filter_by(id=id).first()
+        print(comment.id)
+        comment.content="*已删除*"
+        db.session.commit()
+        return json.dumps({"msg":"good"})
+    elif type=="msg":
+        message=models.message.query.filter_by(id=id).first()
+        print(message.id)
+        db.session.delete(message)
+        db.session.commit()
+        return json.dumps({"msg":"good"})
+    elif type=="msgsent":
+        message=models.message.query.filter_by(id=id).first()
+        print(message.id)
+        db.session.delete(message)
+        db.session.commit()
+        return json.dumps({"msg":"good"})

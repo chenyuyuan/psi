@@ -65,7 +65,7 @@ def test(topicid):
         thisstar=True
     print(thisstar)
     print(str(uid)+"+"+str(topicid))
-    return render_template('/topic.html', title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
+    return render_template('/topic.html', title='话题',thisstar=thisstar,myid=session["uid"],username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,answered=answered,answercontent=answercontent)
 
 @btopic.route('/topic/<topicid>/question',methods=['GET','POST'])
 def topicquestion(topicid):
@@ -113,7 +113,7 @@ def topicquestion(topicid):
         thisstar=True
     # print(thisstar)
     # print(str(uid)+"+"+str(topicid))
-    return render_template('/topicquestion.html',title='话题',thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,question=question)
+    return render_template('/topicquestion.html',title='话题',myid=session["uid"],thisstar=thisstar,username=username,uid=uid,users=users,topicid=topicid,thistopic=thistopic,question=question)
 
 @btopic.route('/topic/star',methods=['GET','POST'])
 def staringtopic():
