@@ -118,15 +118,21 @@
             </div>
             <div class="col-md-5 column" style="padding:0;margin: 2px">
 
-                <div class="shadow-smaller" style="position: fixed;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">回答</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">评论</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏问题</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏回答</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">我关注的人</span>
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 21px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注我的人</span>
-                    <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
+                <div class="shadow-smaller" name="{{fid}}" style="position: fixed;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/ask'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/answer'" style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">回答</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/comment'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">评论</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/questionstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏问题</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/answerstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏回答</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注了</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注者</span>
+                    {% if mine=="0" %}
+                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    {% elif mine=="1" %}
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msgsent'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">我发的消息</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msg'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">私信</span>
+                    {% endif %}
                 </div>
                 <div style="margin-top: 60px"></div>
                 {%for key in answer%}
@@ -142,7 +148,7 @@
                         <span class="text-info quelike" name="1_{{key.id}}" style="background-color:#00b0e4;padding:6px 12px 6px 12px;border: #31708f 1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;">▲{{key.like}}</span>
                         {% endif %}
                         <span class="text-muted" style="margin-left: 20px;">分享</span>
-                        <span class="text-muted" style="margin-left: 20px;">•••</span>
+                        <span class="text-muted pull-right deleteit" style="color:red;margin-left: 20px;">删除</span>
                     </div>
                     <hr id="line{{key.id}}" style="display:none;margin-top: 15px;margin-bottom: 15px"/>
                     <div id="thetopcomment" style="" name="0">
@@ -176,13 +182,13 @@
             </div>
             <div class="col-md-3 column" style="position: fixed;right:16%;padding: 0;margin: 2px">
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
-                        <span class="text-muted" style="text-align: center;display: block;font-size: 16px">关注了</span>
-                        <span class="" style="text-align: center;display: block;font-size: 16px">2</span>
+                    <div name="{{fid}}" style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" class="text-muted" style="text-align: center;display: block;font-size: 16px">关注了</span>
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" class="" style="text-align: center;display: block;font-size: 16px">2</span>
                     </div>
-                    <div style="width: 50% ;background-color: #ffffff;position:relative;float:left">
-                        <span class="text-muted" style="text-align: center;display: block;font-size: 16px">关注者</span>
-                        <span class="" style="text-align: center;display: block;font-size: 16px">5</span>
+                    <div name="{{fid}}" style="width: 50% ;background-color: #ffffff;position:relative;float:left">
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" class="text-muted" style="text-align: center;display: block;font-size: 16px">关注者</span>
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" class="" style="text-align: center;display: block;font-size: 16px">5</span>
                     </div>
                     <div style="clear:both"></div>
                 </div>

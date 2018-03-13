@@ -125,26 +125,30 @@
                     <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/questionstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏问题</span>
                     <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/answerstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏回答</span>
                     <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注了</span>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注者</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注者</span>
                     {% if mine=="0" %}
                     <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                     <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                     {% elif mine=="1" %}
                     <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msgsent'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">我发的消息</span>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msg'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">私信</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msg'" style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">私信</span>
                     {% endif %}
+                    <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
                 </div>
                 <div style="margin-top: 60px"></div>
-                {%for key in myfollow%}
+                 {%for key in msg%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <img src="http://127.0.0.1:3000/static/userhead/{{key.id}}.jpg" style="width: 25px" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">
-                    <span style="font-size: 19px;font-family: 'Microsoft JhengHei'" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">{{key.account}}</span>
-                    <span style="font-size: 15px;">{{key.shortIntro}}</span>
-                    {% if key.starhim=="0" %}
-                    <span class="pull-right follow" name="0_{{key.id}}" style="margin-left: 22px;color:#77839c">关注他/她</span>
-                    {% elif key.starhim=="1" %}
-                    <span class="pull-right follow" name="1_{{key.id}}" style="margin-left: 22px;color:#77839c">取消关注</span>
-                    {% endif %}
+                    <div>
+                        <div name="{{key.id}}" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                            <div>
+                                <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 15px">
+                                <span>{{key.account}}&nbsp说 : </span>
+                                <span>{{key.content}}</span>
+                                <span class="text-muted pull-right deleteit" style="color:red;margin-left: 20px;">删除</span>
+                                <span class="pull-right">{{key.time}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {%endfor%}
                 <br/>
@@ -243,7 +247,7 @@
 </div>
 <script type="text/javascript" charset="UTF-8">
     $(document).ready(function () {
-          //私信
+        //私信
         $("#sendmsgs").click(function () {
             fid=$(this).attr("name")
             msg=$("#msg").val()
