@@ -40,12 +40,21 @@
         <div class="row clearfix">
             <div class="col-md-2 column">
                 <div class="shadow-smaller" style="margin-top: 50px;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <hr style="margin-top: 0px"/><span style="text-align: center;display: block;font-size: 16px">用户</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">话题</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">问题</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">回答</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">评论</span><hr/>
-                    <span style="text-align: center;display: block;font-size: 16px">创建话题</span><hr/>
+                    <hr style="margin-top: 0px"/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmin'" style="text-align: center;display: block;font-size: 16px">用户</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmintopic'" style="font-weight: bold;text-align: center;display: block;font-size: 16px">话题</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminquestion'" style="text-align: center;display: block;font-size: 16px">问题</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminanswer'" style="text-align: center;display: block;font-size: 16px">回答</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmincomment'" style="text-align: center;display: block;font-size: 16px">评论</span><hr/>
+                    <span onclick="if($('.atopic').css('display')=='none'){$('.atopic').css('display','')}else{$('.atopic').css('display','none')}" style="text-align: center;display: block;font-size: 16px">创建话题</span><hr/>
+                    <div class="atopic" style="display:none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 0px;;margin-bottom: 0px;margin-right:-10px;padding:0;">
+                     <input id="topic" type="text" class="form-control center-block" placeholder="话题名称" style="width:150px;height: 48px">
+                        <input id="topicintro" type="text" class="form-control center-block" placeholder="话题简介" style="width:150px;height: 48px;border-top: 0px">
+                        <p id="tips" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="submitinfo" type="submit" class="btn btn-primary center-block" style="width:150px;height: 40px;margin-top: 20px">创建话题</button>
+                        <hr/>
+                        <div style="clear: both"></div>
+                </div>
                     <span onclick="window.location.href='http://127.0.0.1:3000/logoutadmin'" style="text-align: center;display: block;font-size: 16px">退出登录</span><hr style="margin-bottom: 0px"/>
                 </div>
 
@@ -101,28 +110,14 @@
             <div class="col-md-5 column" style="padding:0;margin: 2px">
 
                 <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span id="toanswer" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">所有</span>
-                    <span class="pull-right" style="margin-left: 22px;color:#77839c">待处理</span>
+                    <span id="createtopic" onclick="if($('.atopic').css('display')=='none'){$('.atopic').css('display','')}else{$('.atopic').css('display','none')}"  style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"></span>
                 </div>
-                <div id='answering' style="display: none">
-                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 25px"/>
-                        <span>chenyuyuan</span>
-                    </div>
-                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <textarea style="width: 100%;height: 100px;border: 0;" onclick="if($(this).val()=='写回答..'){$(this).val('')}">写回答..</textarea>
-                    </div>
-                    <div class="shadow-smaller" style="height:64px;background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <button id="submitanswer" class="btn btn-info" style="position: relative;float: right">提交问题</button>
-                    </div>
-                </div>
-                {%for key in users%}
+
+                {%for key in topic%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <img src="http://127.0.0.1:3000/static/userhead/{{key.id}}.jpg" style="width: 22px"/>
-                    <span style="font-size: 18px;font-family: 'Helvetica Neue';">{{key.account}}</span>
-                    <span class="text-muted">{{key.sex}}</span>
-                    <span class="text-muted">{{key.grade}}</span>
-                    <span class="text-muted">{{key.major}}</span>
+                    <img src="http://127.0.0.1:3000/static/topichead/{{key.id}}.jpg" style="width: 22px"/>
+                    <span style="font-size: 18px;font-family: 'Helvetica Neue';">{{key.topic}}</span>
+                    <span class="text-muted">{{key.topicIntro}}</span>
                     <span class="text-muted" style="font-size: 12px">{{key.time}}</span>
                 </div>
                 {%endfor%}
@@ -160,6 +155,7 @@
                 </div>
             </div>
             <div class="col-md-2 column">
+
             </div>
         </div>
         <hr style="margin: 20px;">
@@ -178,7 +174,39 @@
 </div>
 <script type="text/javascript" charset="UTF-8">
     $(document).ready(function () {
-
+        //创建话题
+         $("#submitinfo").click(function () {
+            topic=$("#topic").val()
+            topicintro=$("#topicintro").val()
+            tips=$("#tips")
+            if (topic==""||topicintro==""){
+                tips.html("请输入")
+            }
+            else {
+                tips.html("")
+                data={
+                    "topic":topic,
+                    "topicintro":topicintro
+                }
+                $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/homeadmin/createtopic',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    if (data.msg=="existed"){
+                        tips.html("该话题已存在")
+                    }
+                    else if(data.msg=="good"){
+                        tips.html("创建成功")
+                        window.location.reload()
+                    }
+                }
+            })
+            }
+        })
+        //
         $('#share').click(function () {
             alert("111111");
             var v="ppp";

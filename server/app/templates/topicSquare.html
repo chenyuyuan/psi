@@ -40,9 +40,6 @@
                         <li>
                             <a href="http://127.0.0.1:3000/home">首页</a>
                         </li>
-                        <li class="disabled">
-                            <a href="#">发现</a>
-                        </li>
                         <li>
                             <a class="text-muted" href="http://127.0.0.1:3000/topicSquare">话题</a>
                         </li>
@@ -182,7 +179,8 @@
                 data:JSON.stringify(data),
                 dataType:'json',
                 success:function (data) {
-                    alert(data.msg)
+                    // alert(data.msg)
+                    window.location.reload()
                 }
             })
     })

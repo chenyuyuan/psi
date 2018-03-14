@@ -35,9 +35,197 @@ def home():
         })
     temptopic=temptopic[::-1]
     answers=models.answer.query.all()
-    
-
-    return render_template('/home.html',user=user,myid=session["uid"],temptopic=temptopic)
+    answercontent = []
+    answered = []
+    uid = session['uid']
+    user = models.user.query.filter_by(id=uid).first()
+    username = user.account
+    users = models.user.query.all()
+    count = 0
+    for key in answers:
+        for k in users:
+            if k.id == key.uid:
+                flag = "0"
+                flag2 = "0"
+                if models.ansLike.query.filter_by(uid=uid, ansid=key.id).first():
+                    flag = "1"
+                if models.ansStar.query.filter_by(uid=uid, ansid=key.id).first():
+                    print("查到")
+                    flag2 = "1"
+                answered.append({
+                    "id": key.id,
+                    "qid": key.qid,
+                    "like": key.like,
+                    "ilike": flag,
+                    "istar": flag2,
+                    "comCount": key.comCount,
+                    "uid": key.uid,
+                    "account": k.account,
+                    "shortIntro": k.shortIntro,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                    "score": key.score,
+                    "queTitle": key.queTitle,
+                    "topicid": key.topicid,
+                    "delete": key.delete
+                })
+                break
+    print(answered)
+    answered = answered[::-1]
+    for key in answered:
+        with open("C://Users//梅西//Desktop//forserver//answer//" + str(key['id']) + ".txt", "r+") as f:
+            h = f.read()
+        answered[count]["content"] = h
+        count = count + 1
+    return render_template('/home.html',user=user,myid=session["uid"],temptopic=temptopic,answered=answered,username=username,uid=uid,users=users)
+@bhome.route('/home/like')
+def homelike():
+    uid=session["uid"]
+    user=[]
+    temptopic=[]
+    users=models.user.query.all()
+    temptopics=models.tempTopic.query.all()
+    for key in users:
+        if key.id==uid:
+            user=key
+    for key in temptopics:
+        flag0="0"
+        if models.tempTopicSupport.query.filter_by(uid=uid,temptopicid=key.id).first():
+            flag0="1"
+        temptopic.append({
+            "id":key.id,
+            "uid":key.uid,
+            "topic":key.topic,
+            "isupport":flag0,
+            "topicIntro":key.topicIntro,
+            "support":key.support,
+            "time": time.strftime("%m-%d %H:%M:%S", time.localtime(key.time))
+        })
+    temptopic=temptopic[::-1]
+    answers=models.answer.query.all()
+    answercontent = []
+    answered = []
+    uid = session['uid']
+    user = models.user.query.filter_by(id=uid).first()
+    username = user.account
+    users = models.user.query.all()
+    count = 0
+    for key in answers:
+        for k in users:
+            if k.id == key.uid:
+                flag = "0"
+                flag2 = "0"
+                if models.ansLike.query.filter_by(uid=uid, ansid=key.id).first():
+                    flag = "1"
+                if models.ansStar.query.filter_by(uid=uid, ansid=key.id).first():
+                    print("查到")
+                    flag2 = "1"
+                answered.append({
+                    "id": key.id,
+                    "qid": key.qid,
+                    "like": key.like,
+                    "ilike": flag,
+                    "istar": flag2,
+                    "comCount": key.comCount,
+                    "uid": key.uid,
+                    "account": k.account,
+                    "shortIntro": k.shortIntro,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                    "score": key.score,
+                    "queTitle": key.queTitle,
+                    "topicid": key.topicid,
+                    "delete": key.delete
+                })
+                break
+    l=len(answered)
+    print(answered)
+    for i in range(0,l-1):
+        index=i
+        for j in range(i+1,l):
+            if answered[index]["like"]<answered[j]["like"]:
+                index=j
+        answered[i],answered[index]=answered[index],answered[i]
+    #answered = answered[::-1]
+    for key in answered:
+        with open("C://Users//梅西//Desktop//forserver//answer//" + str(key['id']) + ".txt", "r+") as f:
+            h = f.read()
+        answered[count]["content"] = h
+        count = count + 1
+    return render_template('/homelike.html',user=user,myid=session["uid"],temptopic=temptopic,answered=answered,username=username,uid=uid,users=users)
+@bhome.route('/home/com')
+def homecom():
+    uid=session["uid"]
+    user=[]
+    temptopic=[]
+    users=models.user.query.all()
+    temptopics=models.tempTopic.query.all()
+    for key in users:
+        if key.id==uid:
+            user=key
+    for key in temptopics:
+        flag0="0"
+        if models.tempTopicSupport.query.filter_by(uid=uid,temptopicid=key.id).first():
+            flag0="1"
+        temptopic.append({
+            "id":key.id,
+            "uid":key.uid,
+            "topic":key.topic,
+            "isupport":flag0,
+            "topicIntro":key.topicIntro,
+            "support":key.support,
+            "time": time.strftime("%m-%d %H:%M:%S", time.localtime(key.time))
+        })
+    temptopic=temptopic[::-1]
+    answers=models.answer.query.all()
+    answercontent = []
+    answered = []
+    uid = session['uid']
+    user = models.user.query.filter_by(id=uid).first()
+    username = user.account
+    users = models.user.query.all()
+    count = 0
+    for key in answers:
+        for k in users:
+            if k.id == key.uid:
+                flag = "0"
+                flag2 = "0"
+                if models.ansLike.query.filter_by(uid=uid, ansid=key.id).first():
+                    flag = "1"
+                if models.ansStar.query.filter_by(uid=uid, ansid=key.id).first():
+                    print("查到")
+                    flag2 = "1"
+                answered.append({
+                    "id": key.id,
+                    "qid": key.qid,
+                    "like": key.like,
+                    "ilike": flag,
+                    "istar": flag2,
+                    "comCount": key.comCount,
+                    "uid": key.uid,
+                    "account": k.account,
+                    "shortIntro": k.shortIntro,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                    "score": key.score,
+                    "queTitle": key.queTitle,
+                    "topicid": key.topicid,
+                    "delete": key.delete
+                })
+                break
+    l=len(answered)
+    print(answered)
+    for i in range(0,l-1):
+        index=i
+        for j in range(i+1,l):
+            if answered[index]["comCount"]<answered[j]["comCount"]:
+                index=j
+        answered[i],answered[index]=answered[index],answered[i]
+    # print(answered)
+    # answered = answered[::-1]
+    for key in answered:
+        with open("C://Users//梅西//Desktop//forserver//answer//" + str(key['id']) + ".txt", "r+") as f:
+            h = f.read()
+        answered[count]["content"] = h
+        count = count + 1
+    return render_template('/homecom.html',user=user,myid=session["uid"],temptopic=temptopic,answered=answered,username=username,uid=uid,users=users)
 
 @bhome.route('/home/applyingtopic',methods=['GET','POST'])
 def applyingtopic():
@@ -120,9 +308,129 @@ def homeadmin():
             "id": key.id,
             "account": key.account,
             "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
-            "shrtIntro": key.shortIntro,
+            "shortIntro": key.shortIntro,
             "grade": key.grade,
             "major": key.major,
             "sex": key.sex
         })
     return render_template('/homeadmin/homeadmin.html', users=user)
+@bhome.route('/homeadmintopic')
+def homeadmintopic():
+    uid = session["uid"]
+    users = models.user.query.all()
+    topics=models.topic.query.all()
+    topic=[]
+    for key in topics:
+        topic.append({
+            "id": key.id,
+            "topic": key.topic,
+            "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+            "topicIntro": key.topicIntro,
+            "queCount": key.queCount,
+            "starCount": key.starCount
+        })
+    return render_template('/homeadmin/homeadmintopic.html', topic=topic)
+@bhome.route('/homeadminquestion')
+def homeadminquestion():
+    uid = session["uid"]
+    topics = models.topic.query.all()
+    questions=models.question.query.all()
+    question=[]
+    for key in questions:
+        for say in topics:
+            if say.id==key.reltopicid:
+                question.append({
+                    "id": key.id,
+                    "question": key.question,
+                    "like":key.like,
+                    "ansCount":key.ansCount,
+                    "uid":key.uid,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                    "reltopicid":key.reltopicid,
+                    "topic":say.topic,
+                    "followerCount":key.followerCount
+                })
+    return render_template('/homeadmin/homeadminquestion.html', question=question)
+@bhome.route('/homeadminanswer')
+def homeadminanswer():
+    uid = session["uid"]
+    users = models.user.query.all()
+    answers=models.answer.query.all()
+    answer=[]
+    for key in answers:
+        for say in users:
+            if key.uid==say.id:
+                topic=models.topic.query.filter_by(id=key.topicid).first()
+                answer.append({
+                    "id":key.id,
+                    "qid":key.qid,
+                    "like":key.like,
+                    "time":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                    "queTitle":key.queTitle,
+                    "topicid":key.topicid,
+                    "topic":topic,
+                    "account":say.account,
+                    "uid":key.uid,
+                    "delete":key.delete
+                })
+    count=0
+    for key in answer:
+        with open("C://Users//梅西//Desktop//forserver//answer//"+str(key['id'])+".txt","r+") as f:
+            h=f.read()
+        answer[count]["content"]=h
+        count=count+1
+    return render_template('/homeadmin/homeadminanswer.html', answer=answer)
+@bhome.route('/homeadmincomment')
+def homeadmincomment():
+    uid = session["uid"]
+    topics = models.topic.query.all()
+    users=models.user.query.all()
+    comments=models.ansComment.query.all()
+    comment=[]
+    for key in comments:
+        if key.delete==1:
+            for say in users:
+                if key.uid==say.id:
+                    comment.append({
+                        "id":key.id,
+                        "uid":key.uid,
+                        "account":say.account,
+                        "content":key.content,
+                        "time":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                        "delete":key.delete
+                    })
+    for key in comments:
+        if key.delete==0:
+            for say in users:
+                if key.uid==say.id:
+                    comment.append({
+                        "id":key.id,
+                        "uid":key.uid,
+                        "account":say.account,
+                        "content":key.content,
+                        "time":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(key.time)),
+                        "delete":key.delete
+                    })
+    return render_template('/homeadmin/homeadmincomment.html', comment=comment)
+@bhome.route('/homeadmin/createtopic',methods=['GET','POST'])
+def homeadmincreatetopic():
+    thistime=int(time.time())
+    req=request.get_json()
+    topic=req["topic"]
+    topicIntro=req["topicintro"]
+    if models.topic.query.filter_by(topic=topic).first():
+        return json.dumps({"msg":"existed"})
+    else:
+        topics=models.topic.query.all()
+        maxid=topics[len(topics)-1].id+1
+        to=models.topic()
+        to.id=maxid
+        to.topic=topic
+        to.starCount=0
+        to.time=thistime
+        to.topicIntro=topicIntro
+        to.queCount=0
+        to.picture=0
+        db.session.add(to)
+        db.session.commit()
+        return json.dumps({"msg":"good"})

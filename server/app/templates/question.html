@@ -49,9 +49,6 @@
                         <li>
                             <a href="http://127.0.0.1:3000/home">首页</a>
                         </li>
-                        <li class="disabled">
-                            <a href="#">发现</a>
-                        </li>
                         <li>
                             <a class="text-muted" href="http://127.0.0.1:3000/topicSquare">话题</a>
                         </li>
@@ -63,7 +60,7 @@
             </li>
                         <li class="dropdown pull-right" style="margin-top: 7px;margin-right: 8px">
                             <span class="text-muted" name="{{myid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/msg'" style="margin-right: 18px;">消息</span>
-                            <img data-toggle="dropdown" src="http://127.0.0.1:3000/static/userhead/3.jpg" style="width:28px">
+                            <img data-toggle="dropdown" src="http://127.0.0.1:3000/static/userhead/{{myid}}.jpg" style="width:28px">
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="http://127.0.0.1:3000/people/me/myask">个人主页</a>
@@ -180,34 +177,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3 column" style="position: fixed;right:16%">
-                <ul>
-                    <li>
-                        Lorem ipsum dolor sit amet
-                    </li>
-                    <li>
-                        Consectetur adipiscing elit
-                    </li>
-                    <li>
-                        Integer molestie lorem at massa
-                    </li>
-                    <li>
-                        Facilisis in pretium nisl aliquet
-                    </li>
-                    <li>
-                        Nulla volutpat aliquam velit
-                    </li>
-                    <li>
-                        Faucibus porta lacus fringilla vel
-                    </li>
-                    <li>
-                        Aenean sit amet erat nunc
-                    </li>
-                    <li>
-                        Eget porttitor lorem
-                    </li>
-                </ul>
-            </div>
+
             <div class="col-md-2 column">
             </div>
         </div>
@@ -253,11 +223,11 @@
                 contentType:"application/json; charset=UTF-8",
                 success:function (data) {
                   if(data.msg=="stared")  {
-                      alert("stared")
+                      // alert("stared")
                       window.location.reload()
                   }
                   else if(data.msg=="canceled"){
-                      alert("canceled")
+                      // alert("canceled")
                       window.location.reload()
                   }
                 },
@@ -286,11 +256,11 @@
                 contentType:"application/json; charset=UTF-8",
                 success:function (data) {
                   if(data.msg=="stared")  {
-                      alert("stared")
+                      // alert("stared")
                       window.location.reload()
                   }
                   else if(data.msg=="canceled"){
-                      alert("canceled")
+                      // alert("canceled")
                       window.location.reload()
                   }
                 },
@@ -319,11 +289,11 @@
                 contentType:"application/json; charset=UTF-8",
                 success:function (data) {
                   if(data.msg=="liked")  {
-                      alert("liked")
+                      // alert("liked")
                       window.location.reload()
                   }
                   else if(data.msg=="canceled"){
-                      alert("canceled")
+                      // alert("canceled")
                       window.location.reload()
                   }
                 },

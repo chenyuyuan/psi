@@ -13,11 +13,13 @@ btopicSquare=Blueprint('btopicSquare', __name__)
 @btopicSquare.route('/topicSquare')
 def test():
     alltopic = models.topic.query.all()
-    sql='select *  from topicstar where uid=1'
+    uid = session['uid']
+    kk=str(uid)
+    sql='select *  from topicstar where uid='+kk
     mystartopic = list()
     mystartopic = db.session.execute(sql)
     count=0
-    uid=session['uid']
+
     # for key in mystartopic:
     #     print(key.topic)
 
