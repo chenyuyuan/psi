@@ -39,24 +39,7 @@
     <div class="col-md-12 column" style="position: fixed;top: 0;z-index: 999">
         <div class="row clearfix">
             <div class="col-md-2 column">
-                <div class="shadow-smaller" style="margin-top: 50px;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <hr style="margin-top: 0px"/>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmin'" style="text-align: center;display: block;font-size: 16px">用户</span><hr/>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmintopic'" style="text-align: center;display: block;font-size: 16px">话题</span><hr/>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminquestion'" style="text-align: center;display: block;font-size: 16px">问题</span><hr/>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminanswer'" style="text-align: center;display: block;font-size: 16px">回答</span><hr/>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmincomment'" style="font-weight: bold;text-align: center;display: block;font-size: 16px">评论</span><hr/>
-                    <span onclick="if($('.atopic').css('display')=='none'){$('.atopic').css('display','')}else{$('.atopic').css('display','none')}" style="text-align: center;display: block;font-size: 16px">创建话题</span><hr/>
-                    <div class="atopic" style="display:none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 0px;;margin-bottom: 0px;margin-right:-10px;padding:0;">
-                     <input id="topic" type="text" class="form-control center-block" placeholder="话题名称" style="width:150px;height: 48px">
-                        <input id="topicintro" type="text" class="form-control center-block" placeholder="话题简介" style="width:150px;height: 48px;border-top: 0px">
-                        <p id="tips" class="text-center text-muted" style="margin-top: 10px"></p>
-                        <button id="submitinfo" type="submit" class="btn btn-primary center-block" style="width:150px;height: 40px;margin-top: 20px">创建话题</button>
-                        <hr/>
-                        <div style="clear: both"></div>
-                    </div>
-                    <span onclick="window.location.href='http://127.0.0.1:3000/logoutadmin'" style="text-align: center;display: block;font-size: 16px">退出登录</span><hr style="margin-bottom: 0px"/>
-                </div>
+            
 
             </div>
             <div class="col-md-8 column" style="">
@@ -67,9 +50,6 @@
                         </li>
                         <li>
                             <a href="http://127.0.0.1:3000/home">首页</a>
-                        </li>
-                        <li class="disabled">
-                            <a href="#">发现</a>
                         </li>
                         <li>
                             <a class="text-muted" href="http://127.0.0.1:3000/topicSquare">话题</a>
@@ -103,26 +83,14 @@
         </div>
     </div>
 
-    <div class="col-md-12 column" style="margin-top: 50px">
+     <div class="col-md-12 column" style="margin-top: 50px">
         <div class="row clearfix">
             <div class="col-md-2 column">
             </div>
             <div class="col-md-5 column" style="padding:0;margin: 2px">
-                <div style="display: none">
-                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 25px"/>
-                        <span>chenyuyuan</span>
-                    </div>
-                    <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <textarea style="width: 100%;height: 100px;border: 0;" onclick="if($(this).val()=='写回答..'){$(this).val('')}">写回答..</textarea>
-                    </div>
-                    <div class="shadow-smaller" style="height:64px;background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                        <button id="submitanswer" class="btn btn-info" style="position: relative;float: right">提交问题</button>
-                    </div>
-                </div>
-                {%for key in comment%}
+            {%for key in comment%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
-                    <div name="data.count" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                    <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
                         <div>
                             <img src="http://127.0.0.1:3000/static/userhead/{{key.uid}}.jpg" style="width: 15px">
                             <span>{{key.account}} : </span>
@@ -136,7 +104,6 @@
                     </div>
                 </div>
                 {% endfor %}
-                <br/>
                 <ul class="pagination" style="margin-left: 30px;margin-right: 30px">
                     <li>
                         <a href="#">Prev</a>
@@ -161,11 +128,25 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3 column" style="position: fixed;right:16%;padding: 0;margin: 2px">
-                <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
-                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 18px 8px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;"></span>
-                    <span class="pull-right" style="margin-left: 22px;color:#77839c"></span>
-                    <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
+            <div class="col-md-3 column" style="position: fixed;right:16%">
+                
+                <div class="shadow-smaller" style="margin-top: 20px;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <hr style="margin-top: 0px"/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmin'" style="text-align: center;display: block;font-size: 16px">用户</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmintopic'" style="text-align: center;display: block;font-size: 16px">话题</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminquestion'" style="text-align: center;display: block;font-size: 16px">问题</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadminanswer'" style="text-align: center;display: block;font-size: 16px">回答</span><hr/>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/homeadmincomment'" style="font-weight: bold;text-align: center;display: block;font-size: 16px">评论</span><hr/>
+                    <span onclick="if($('.atopic').css('display')=='none'){$('.atopic').css('display','')}else{$('.atopic').css('display','none')}" style="text-align: center;display: block;font-size: 16px">创建话题</span><hr/>
+                    <div class="atopic" style="display:none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 0px;;margin-bottom: 0px;margin-right:-10px;padding:0;">
+                     <input id="topic" type="text" class="form-control center-block" placeholder="话题名称" style="width:150px;height: 48px">
+                        <input id="topicintro" type="text" class="form-control center-block" placeholder="话题简介" style="width:150px;height: 48px;border-top: 0px">
+                        <p id="tips" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="submitinfo" type="submit" class="btn btn-primary center-block" style="width:150px;height: 40px;margin-top: 20px">创建话题</button>
+                        <hr/>
+                        <div style="clear: both"></div>
+                    </div>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/logoutadmin'" style="text-align: center;display: block;font-size: 16px">退出登录</span><hr style="margin-bottom: 0px"/>
                 </div>
             </div>
             <div class="col-md-2 column">
@@ -185,12 +166,13 @@
         </div>
     </div>
 </div>
+</div>
 <script type="text/javascript" charset="UTF-8">
     $(document).ready(function () {
         //删除
         $(".deleteit").click(function () {
             id=$(this).attr("name")
-            type="msg"
+            type="comment"
             data={
                 "id":id,
                 "type":type

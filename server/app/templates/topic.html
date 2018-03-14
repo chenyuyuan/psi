@@ -97,7 +97,7 @@
                     {%endif%}
                         &nbsp&nbsp&nbsp
                     <span id="share" style="color: deepskyblue">分享</span>
-                    <span id="ask" class="text-muted" style="margin-left: 20px">提问题</span>
+                    <span class="text-muted" onclick="if($('#asking').css('display')=='none'){$('#asking').css('display','')}else{$('#asking').css('display','none')}"  style="margin-left: 20px">提问题</span>
                 </div>
                         <div id='asking' name="{{topicid}}" style="display: none">
                             <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
@@ -115,7 +115,6 @@
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
                     <span style="font-size: 16px;font-weight: bold">讨论</span>
                     <span name="{{topicid}}" style="font-size: 16px;margin-left: 40px" onclick="window.location.href='http://127.0.0.1:3000/topic/'+$(this).attr('name')+'/question'">等待回答</span>
-                    <span class="pull-right text-muted"><=>切换为按时间排序</span>
                     </div>
                 {%for key in answered%}
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
@@ -176,32 +175,6 @@
                 </ul>
             </div>
             <div class="col-md-3 column" style="position: fixed;right:16%">
-                <ul>
-                    <li>
-                        Lorem ipsum dolor sit amet
-                    </li>
-                    <li>
-                        Consectetur adipiscing elit
-                    </li>
-                    <li>
-                        Integer molestie lorem at massa
-                    </li>
-                    <li>
-                        Facilisis in pretium nisl aliquet
-                    </li>
-                    <li>
-                        Nulla volutpat aliquam velit
-                    </li>
-                    <li>
-                        Faucibus porta lacus fringilla vel
-                    </li>
-                    <li>
-                        Aenean sit amet erat nunc
-                    </li>
-                    <li>
-                        Eget porttitor lorem
-                    </li>
-                </ul>
             </div>
             <div class="col-md-2 column">
             </div>
@@ -257,16 +230,16 @@
                 },
             })
         })
-        //回答框显示
-        $("#ask").click(function () {
-            display=$("#asking").css("display")
-            if(display==="none"){
-                $("#asking").css("display","")
-            }
-            else if(display==""){
-                $("#asking").css("display","none")
-            }
-        })
+        // //回答框显示
+        // $("#ask").click(function () {
+        //     display=$("#asking").css("display")
+        //     if(display==="none"){
+        //         $("#asking").css("display","")
+        //     }
+        //     else if(display==""){
+        //         $("#asking").css("display","none")
+        //     }
+        // })
         //收藏回答
         $(".answerstar").click(function () {
             a=$(this).attr("name");

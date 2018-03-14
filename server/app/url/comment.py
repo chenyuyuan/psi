@@ -75,6 +75,10 @@ def anscommentsubmit():
         if key.id==req["pid"]:
             break
         count=count+1
+    anss=models.answer.query.filter_by(id=req["ansid"]).first()
+    if anss:
+        anss.comCount=anss.comCount+1
+    db.session.commit()
     return json.dumps({"msg":"good","count":count,"myname":myname,"myuid":uid,"content":req["content"],"time":thistime,"data":{"id":"1"}})
 @bcomment.route('/comment/answer/tipoff',methods=['GET','POST'])
 def anscommenttipoff():
